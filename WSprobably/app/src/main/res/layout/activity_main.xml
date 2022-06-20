@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/big_set_of_many_hamburgers_top_view_cheesrubogers_beautifully_laid_out_on_a_tray_seth_fast_food_food_background_copy_space_124865_9172"
+    tools:context=".MainActivity" />

@@ -1,0 +1,1 @@
+rootProject.name = "ru.shushufood.shushufood-backend"
