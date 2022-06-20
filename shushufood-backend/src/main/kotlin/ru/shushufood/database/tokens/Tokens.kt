@@ -4,6 +4,7 @@ import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 
 object Tokens: Table() {
     private val id = Tokens.varchar("id", 50)
@@ -19,5 +20,20 @@ object Tokens: Table() {
             }
         }
     }
-
+    fun fetchTokens(): List<TokenDTO> {
+        return try {
+            transaction {
+                Tokens.selectAll().toList()
+                    .map {
+                        TokenDTO(
+                            rowId = it[Tokens.id],
+                            token = it[Tokens.token],
+                            login = it[Tokens.login]
+                        )
+                    }
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
 }
