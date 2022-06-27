@@ -6,7 +6,11 @@
     <string name="sign_in_subtitle">Don\'t have an account?</string>
     <string name="sign_up_subtitle">Already has account?</string>
     <string name="forgot_subtitle">We are so sorry</string>
-    <string name="sign_in_action">Sign Up!</string>
-    <string name="sign_up_action">Sign In!</string>
-    <string name="email_hint">Email Adress</string>
+    <string name="sign_up_action">Sign Up!</string>
+    <string name="sign_in_action">Sign In!</string>
+    <string name="email_hint">Email Address</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in_forget">Forgot password?</string>
+    <string name="remember_check_title">Remember me</string>
+    <string name="action_login">Log In!</string>
 </resources>
