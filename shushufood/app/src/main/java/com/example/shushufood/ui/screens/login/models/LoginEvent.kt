@@ -1,4 +1,6 @@
 package com.example.shushufood.ui.screens.login.models
 
-class LoginEvent {
+sealed class LoginEvent {
+    object ActionClicked : LoginEvent()
+    data class EmailChanged(val value: String) : LoginEvent()
 }

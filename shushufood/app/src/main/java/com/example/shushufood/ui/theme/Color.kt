@@ -10,6 +10,7 @@ data class Colors(
     val systemButtonsColor: Color,
     val eclipseIndicatorColor1: Color,
     val eclipseIndicatorColor2: Color,
+    val actionTextColor: Color
 )
 
 val lightPalette = Colors(
@@ -19,5 +20,6 @@ val lightPalette = Colors(
     primaryTextColor = Color(0xFF9923A6),
     headerTextColor = Color(0xFFF16CFF),
     eclipseIndicatorColor2 = Color(0xFFB76DBF),
-    eclipseIndicatorColor1 = Color(0xFFF7AEFF)
+    eclipseIndicatorColor1 = Color(0xFFF7AEFF),
+    actionTextColor = Color(0xFF22A2FF)
 )
