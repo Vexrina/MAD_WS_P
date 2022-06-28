@@ -7,4 +7,6 @@ sealed class LoginEvent {
     data class CheckboxClicked(val value: Boolean) : LoginEvent()
     data class EmailChanged(val value: String) : LoginEvent()
     data class PasswordChanged(val value: String) : LoginEvent()
+    data class PhoneNumberChanged(val value: String) : LoginEvent()
+    data class FullNameChanged(val value: String) : LoginEvent()
 }

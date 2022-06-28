@@ -1,14 +1,10 @@
 package com.example.shushufood.ui.screens.login
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -33,7 +29,6 @@ import com.example.shushufood.ui.screens.login.views.ForgotView
 import com.example.shushufood.ui.screens.login.views.SignInView
 import com.example.shushufood.ui.screens.login.views.SignUpView
 import com.example.shushufood.ui.theme.AppTheme
-import com.example.shushufood.ui.theme.AppTheme.colors
 import androidx.compose.material.Text as Text
 
 
@@ -82,7 +77,7 @@ fun LoginScreen(
                     )
                 }
             item{
-                Row(modifier = Modifier.padding(top = 12.dp)){
+                Row(modifier = Modifier.padding(top = 0.dp)){
                     Text(
                         text = when (loginSubState) {
                             LoginSubState.SignIn -> stringResource(id = R.string.sign_in_subtitle)
@@ -135,7 +130,27 @@ fun LoginScreen(
                             loginViewModel.obtainEvent(LoginEvent.LoginClicked)
                         },
                     )
-                    LoginSubState.SignUp -> SignUpView()
+                    LoginSubState.SignUp -> SignUpView(
+                        viewState = this@with,
+                        onEmailFieldChange = {
+                            loginViewModel.obtainEvent(LoginEvent.EmailChanged(it))
+                        },
+                        onPasswordFieldChange = {
+                            loginViewModel.obtainEvent(LoginEvent.PasswordChanged(it))
+                        },
+                        onFullNameFieldChange =  {
+                            loginViewModel.obtainEvent(LoginEvent.FullNameChanged(it))
+                        },
+                        onPhoneNumberFieldChange =  {
+                            loginViewModel.obtainEvent(LoginEvent.PhoneNumberChanged(it))
+                        },
+                        onRegisterClick = {
+                            loginViewModel.obtainEvent(LoginEvent.LoginClicked)
+                        },
+                        onCancelClicked = {
+                            loginViewModel.obtainEvent(LoginEvent.LoginClicked)
+                        },
+                    )
                     LoginSubState.Forgot -> ForgotView()
                 }
             }

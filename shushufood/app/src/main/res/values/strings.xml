@@ -13,4 +13,8 @@
     <string name="sign_in_forget">Forgot password?</string>
     <string name="remember_check_title">Remember me</string>
     <string name="action_login">Log In!</string>
+    <string name="phone_number_hint">Phone number</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_register">Register Now!</string>
 </resources>

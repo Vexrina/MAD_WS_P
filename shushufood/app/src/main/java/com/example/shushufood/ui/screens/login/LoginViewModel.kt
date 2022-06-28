@@ -30,6 +30,8 @@ class LoginViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent
             is LoginEvent.ForgetClicked -> forgetClicked()
             is LoginEvent.CheckboxClicked -> checkboxClicked(event.value)
             is LoginEvent.LoginClicked -> loginClicked()
+            is LoginEvent.FullNameChanged -> fullNameChanged(event.value)
+            is LoginEvent.PhoneNumberChanged -> phoneChanged(event.value)
         }
     }
 
@@ -39,6 +41,12 @@ class LoginViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent
             LoginSubState.SignUp -> _viewState.postValue(_viewState.value?.copy(loginSubState = LoginSubState.SignIn))
         }
 
+    }
+    private fun fullNameChanged(value: String){
+        _viewState.postValue(_viewState.value?.copy(fullNameValue = value))
+    }
+    private fun phoneChanged(value: String){
+        _viewState.postValue(_viewState.value?.copy(phoneNumberValue = value))
     }
     private fun emailChanged(value: String){
         _viewState.postValue(_viewState.value?.copy(emailValue = value))

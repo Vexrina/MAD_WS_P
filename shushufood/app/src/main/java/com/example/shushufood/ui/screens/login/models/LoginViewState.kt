@@ -17,5 +17,6 @@ data class LoginViewState (
     val fullNameValue: String = "",
     val rememberMeChecked: Boolean = false,
     val isProgress: Boolean = false,
-    val loginAction: LoginAction = LoginAction.None
+    val loginAction: LoginAction = LoginAction.None,
+    val phoneNumberValue: String = "",
 )
