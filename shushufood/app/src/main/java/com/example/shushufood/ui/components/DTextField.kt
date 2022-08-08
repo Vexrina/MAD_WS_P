@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shushufood.ui.theme.AppTheme
+import com.example.shushufood.ui.theme.Inika
 
 @Composable
 fun DTextField(
@@ -28,11 +29,12 @@ fun DTextField(
         enabled = enabled,
         placeholder = {
         Text(
-            text = placeholder,
+            text = placeholder,fontFamily = Inika,
             style = TextStyle(
                 color = AppTheme.colors.primaryTextColor,
                 fontSize = 12.sp
             )
+
         )
     }, shape = RoundedCornerShape(10.dp),
         colors = TextFieldDefaults.textFieldColors(

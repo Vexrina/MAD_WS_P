@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -29,8 +28,8 @@ import com.example.shushufood.ui.screens.login.views.ForgotView
 import com.example.shushufood.ui.screens.login.views.SignInView
 import com.example.shushufood.ui.screens.login.views.SignUpView
 import com.example.shushufood.ui.theme.AppTheme
+import com.example.shushufood.ui.theme.Inika
 import androidx.compose.material.Text as Text
-
 
 @Composable
 fun LoginScreen(
@@ -59,7 +58,8 @@ fun LoginScreen(
                     text = "Shushu Food!", style = TextStyle(
                         AppTheme.colors.primaryTextColor,
                         fontSize = 40.sp
-                    ), textAlign = TextAlign.Center, fontFamily = FontFamily.Serif,
+                    ), textAlign = TextAlign.Center,
+                    fontFamily = Inika,
                     modifier = Modifier.padding(start = 65.dp)
                 )
             }
@@ -69,10 +69,13 @@ fun LoginScreen(
                             LoginSubState.SignIn -> stringResource(id = R.string.sign_in_title)
                             LoginSubState.SignUp -> stringResource(id = R.string.sign_up_title)
                             LoginSubState.Forgot -> stringResource(id = R.string.forgot_title)
-                        }, style = TextStyle(
-                            color = AppTheme.colors.primaryTextColor,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 25.sp
+                        }
+                        ,
+                        fontFamily = Inika,
+                        style = TextStyle(
+                        color = AppTheme.colors.primaryTextColor,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 25.sp
                         )
                     )
                 }
@@ -84,6 +87,7 @@ fun LoginScreen(
                             LoginSubState.SignUp -> stringResource(id = R.string.sign_up_subtitle)
                             LoginSubState.Forgot -> stringResource(id = R.string.forgot_subtitle)
                         },
+                        fontFamily = Inika,
                         style = TextStyle(
                             color = AppTheme.colors.primaryTextColor,
                             fontStyle = FontStyle.Italic
@@ -100,6 +104,7 @@ fun LoginScreen(
                                 LoginSubState.SignUp -> stringResource(id = R.string.sign_up_action)
                                 else -> ""
                             },
+                            fontFamily = Inika,
                             style = TextStyle(
                                 color = AppTheme.colors.actionTextColor,
                                 fontStyle = FontStyle.Italic

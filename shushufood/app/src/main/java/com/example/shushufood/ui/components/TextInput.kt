@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.shushufood.R
 import com.example.shushufood.ui.theme.AppTheme
+import com.example.shushufood.ui.theme.Inika
 
 @Composable
 fun TextInput(
@@ -26,6 +27,7 @@ fun TextInput(
     Column(modifier = modifier)
     {   Text(
         text = header,
+        fontFamily = Inika,
         color = AppTheme.colors.primaryTextColor,
         fontWeight = FontWeight.Medium
     )

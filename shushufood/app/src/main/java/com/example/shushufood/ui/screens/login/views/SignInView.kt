@@ -13,10 +13,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shushufood.R
+import com.example.shushufood.common.isEmailValid
 import com.example.shushufood.ui.components.DTextField
 import com.example.shushufood.ui.components.TextInput
 import com.example.shushufood.ui.screens.login.models.LoginViewState
 import com.example.shushufood.ui.theme.AppTheme
+import com.example.shushufood.ui.theme.Inika
+import androidx.compose.material.Snackbar as S
 
 @Composable
 fun SignInView(
@@ -62,11 +65,12 @@ fun SignInView(
 
             Spacer(modifier = Modifier.width(0.dp))
 
-            Text(text = stringResource(id = R.string.remember_check_title))
+            Text(text = stringResource(id = R.string.remember_check_title),fontFamily = Inika,)
 
             Spacer(modifier = Modifier.weight(1f))
 
             Text(modifier = if(viewState.isProgress) Modifier else Modifier.clickable(onClick = onForgetClick),
+                fontFamily = Inika,
             text = stringResource(id = R.string.sign_in_forget),
             )
         }
@@ -78,7 +82,7 @@ fun SignInView(
                 .height(58.dp),
             onClick = {
                 if(!viewState.isProgress)
-                    onLoginClick.invoke()
+                   onLoginClick.invoke()
             },
             shape = RoundedCornerShape(size = 20.dp),
             colors = ButtonDefaults.buttonColors(
@@ -96,7 +100,8 @@ fun SignInView(
                         text = stringResource(id = R.string.action_login),
                         fontWeight = FontWeight.Medium,
                         color = AppTheme.colors.primaryBackground,
-                        style = TextStyle(fontSize = 35.sp)
+                        style = TextStyle(fontSize = 35.sp),
+                        fontFamily = Inika,
                     )
                 }
         }

@@ -1,6 +1,5 @@
 package com.example.shushufood.ui.screens
 
-import android.window.SplashScreen
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController

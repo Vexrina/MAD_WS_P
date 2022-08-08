@@ -57,7 +57,6 @@ dependencies {
     implementation 'androidx.activity:activity-compose:1.4.0'
 
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.18.0"
-    //implementation "com.google.accompanist:accompanist-systemuicontruller:0.18.0"
 
     implementation "me.saket.swipe:swipe:1.0.0"
 
@@ -77,6 +76,10 @@ dependencies {
 
     def nav_version = "2.4.2"
     implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    //trying ktor like backend
+    implementation("io.ktor:ktor-client-core:2.0.3")
+    implementation("io.ktor:ktor-client-cio:2.0.3")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
