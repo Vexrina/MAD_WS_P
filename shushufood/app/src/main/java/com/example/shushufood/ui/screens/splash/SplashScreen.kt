@@ -21,9 +21,8 @@ fun SplashScreen(navController: NavController){
             modifier = Modifier
                 .fillMaxSize()
         )
-
-    Thread.sleep(3000)
+    //Thread.sleep(3000)
    LaunchedEffect(key1 = Unit, block ={
-        navController.navigate(NavigationTree.Login.name)
+        navController.navigate(NavigationTree.Login.name)//Main to Login when finish
     })
 }

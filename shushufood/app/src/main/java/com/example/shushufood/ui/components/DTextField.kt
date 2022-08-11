@@ -5,6 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -39,11 +40,11 @@ fun DTextField(
     }, shape = RoundedCornerShape(10.dp),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = AppTheme.colors.eclipseIndicatorColor1,
-            disabledIndicatorColor = AppTheme.colors.secondaryBackground,
             errorIndicatorColor = AppTheme.colors.secondaryBackground,
-            focusedIndicatorColor = AppTheme.colors.secondaryBackground,
-            unfocusedIndicatorColor = AppTheme.colors.secondaryBackground
-    ),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+            ),
         visualTransformation = if(secureText) PasswordVisualTransformation() else VisualTransformation.None,
     )
 }
