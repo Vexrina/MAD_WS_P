@@ -40,7 +40,7 @@ fun MainScreen(username: String){
                 Navigation(navController = navController)
             }
         },
-        backgroundColor = AppTheme.colors.primaryBackground
+        backgroundColor = AppTheme.colors.secondaryBackground
     ) // Set background color to avoid the white flashing when you switch between screens
 
 }

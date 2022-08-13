@@ -1,10 +1,13 @@
 package com.example.shushufood.ui.screens.menu_search.models
 
-import com.example.shushufood.ui.screens.login.models.LoginAction
-import com.example.shushufood.ui.screens.login.models.LoginSubState
+enum class SearchSubState{
+        Start, Finish, Clear
+}
+
+
 
 data class SearchViewState(
-
+        val searchSubState: SearchSubState = SearchSubState.Start,
         val query: String = "",
         val searchResults: List<String> = emptyList(),
         val refreshing: Boolean = false,
