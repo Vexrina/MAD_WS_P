@@ -11,11 +11,16 @@ import ru.shushufood.features.utils.TokenCheck
 
 class MenuController(private val call: ApplicationCall) {
         suspend fun performSearch(){
-            val request = call.receive<FetchMenuRequest>()
+            val receive = call.receive<FetchMenuRequest>()
             val token = call.request.headers["Bearer-Authorization"]
 
             if (TokenCheck.isTokenValid(token.orEmpty()) || TokenCheck.isTokenAdmin(token.orEmpty())){
-                call.respond(Menu.fetchFullMenu().filter { it.name.contains(request.searchQuery, ignoreCase = true) })
+                if (receive.searchQuery.isBlank()) {
+                    call.respond(Menu.fetchFullMenu())
+                } else {
+                    call.respond(
+                        Menu.fetchFullMenu().filter { it.name.contains(receive.searchQuery, ignoreCase = true) })
+                }
             } else {
                 call.respond(HttpStatusCode.Unauthorized, "Token expired")
             }

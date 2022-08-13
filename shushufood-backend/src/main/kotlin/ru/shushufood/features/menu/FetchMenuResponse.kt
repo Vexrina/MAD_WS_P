@@ -1,0 +1,17 @@
+package ru.shushufood.features.menu
+
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+data class FetchMenuResponse(
+    val menu: List<MenuResponse>
+)
+
+@Serializable
+data class  MenuResponse(
+    val name: String,
+    val price: Int,
+    val image: String,
+    val category: Int
+)

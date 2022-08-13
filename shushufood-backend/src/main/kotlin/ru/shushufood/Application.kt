@@ -11,7 +11,7 @@ import ru.shushufood.plugins.*
 fun main() {
     Database.connect(url = "jdbc:postgresql://localhost:5432/shushufood", driver = "org.postgresql.Driver",
     user = "postgres", password = "admin")
-    embeddedServer(CIO, port = 8080, host = "0.0.0.0") {
+    embeddedServer(CIO, port = 8080, host = "localhost") {
         configureMenuRouting()
         configureRouting()
         configureLoginRouting()

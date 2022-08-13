@@ -1,15 +1,19 @@
 package ru.shushufood.database.menu
 
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import ru.shushufood.features.menu.CreateMenuRequest
 import ru.shushufood.features.menu.CreateMenuResponse
-import java.util.*
+import ru.shushufood.features.utils.BigDecimalSerializer
+import java.math.BigDecimal
 
+@Serializable
 data class MenuDTO
     (
     var name: String,
-    val price: Int,
-    val image: String,
+    @Serializable(with = BigDecimalSerializer::class)
+    val price: BigDecimal,
+    val image: ByteArray,
     val category: Int
 )
 

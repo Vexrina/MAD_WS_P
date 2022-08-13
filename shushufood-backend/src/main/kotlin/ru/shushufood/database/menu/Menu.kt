@@ -7,14 +7,14 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
 
-object Menu: Table() {
-    private val name = Menu.varchar("name", 25)
-    private val price = Menu.integer("price")
-    private val image = Menu.varchar("image",50)
-    private val category = Menu.integer("category")
+        object Menu: Table() {
+            private val name = Menu.varchar("name", 25)
+            private val price = decimal("price", precision = 6, scale = 2)
+            private val image = Menu.binary("image")
+            private val category = Menu.integer("category")
 
 
-    fun insert(menuDTO: MenuDTO){
+            fun insert(menuDTO: MenuDTO){
         transaction {
             Menu.insert {
                 it[name] = menuDTO.name
