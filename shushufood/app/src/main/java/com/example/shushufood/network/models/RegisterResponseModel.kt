@@ -1,4 +1,4 @@
-package com.example.shushufood.utils.models
+package com.example.shushufood.network.models
 
 import kotlinx.serialization.Serializable
 

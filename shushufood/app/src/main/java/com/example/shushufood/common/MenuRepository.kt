@@ -1,18 +1,32 @@
 package com.example.shushufood.common
 
-import androidx.compose.runtime.produceState
-import androidx.compose.runtime.rememberCoroutineScope
-import com.example.shushufood.utils.models.MenuResponseModel
-import com.example.shushufood.utils.network.ApiService
-import kotlinx.coroutines.coroutineScope
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import com.example.shushufood.db.MenuDao
+import com.example.shushufood.db.asDomainModel
+import com.example.shushufood.network.ApiService
+import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.asDatabaseModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-object MenuRepository {
+class MenuRepository(private val database: MenuDao) {
 
     private val apiService by lazy {
         ApiService.create()
     }
 
-    suspend fun fetchMenu(): List<MenuResponseModel> {
-        return apiService.getProducts("")
+    val menuItems: LiveData<List<MenuResponseModel>> = Transformations.map(database.getMenu()){
+        it.asDomainModel()
+    }
+
+    suspend fun fetchMenu() {
+        withContext(Dispatchers.IO) {
+            val menu = apiService.getProducts("")
+
+            database.insertAll(
+                menu.asDatabaseModel()
+            )
+        }
     }
 }

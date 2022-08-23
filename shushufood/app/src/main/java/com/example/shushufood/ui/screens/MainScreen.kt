@@ -1,22 +1,13 @@
 package com.example.shushufood.ui.screens
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.compose.rememberNavController
 import com.example.shushufood.ui.components.BottomNavigationBar
 import com.example.shushufood.ui.components.Navigation
-import com.example.shushufood.ui.components.TextSearch
-import com.example.shushufood.ui.components.TopBar
-import com.example.shushufood.ui.screens.login.models.LoginViewState
-import com.example.shushufood.ui.screens.menu_search.models.SearchView
-import com.example.shushufood.ui.screens.menu_search.models.SearchViewState
 import com.example.shushufood.ui.theme.AppTheme
 
 @Composable

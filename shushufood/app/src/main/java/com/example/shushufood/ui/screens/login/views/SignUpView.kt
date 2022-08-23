@@ -1,11 +1,12 @@
 package com.example.shushufood.ui.screens.login.views
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -13,7 +14,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shushufood.R
-import com.example.shushufood.ui.components.TextInput
 import com.example.shushufood.ui.components.TextInputForSignUp
 import com.example.shushufood.ui.screens.login.models.LoginViewState
 import com.example.shushufood.ui.theme.AppTheme

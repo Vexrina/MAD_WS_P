@@ -29,7 +29,7 @@ import com.example.shushufood.ui.screens.login.views.SignInView
 import com.example.shushufood.ui.screens.login.views.SignUpView
 import com.example.shushufood.ui.theme.AppTheme
 import com.example.shushufood.ui.theme.Inika
-import com.example.shushufood.utils.network.ApiService
+import com.example.shushufood.network.ApiService
 import androidx.compose.material.Text as Text
 
 private val apiService by lazy {
@@ -170,6 +170,7 @@ fun LoginScreen(
                     popUpTo(NavigationTree.Login.name)
                 }
             }
+            else -> Unit
         }
     }
     DisposableEffect(key1 = Unit, effect ={

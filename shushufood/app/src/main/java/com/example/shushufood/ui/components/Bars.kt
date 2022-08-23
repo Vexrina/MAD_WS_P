@@ -1,13 +1,12 @@
 package com.example.shushufood.ui.components
 
-import android.widget.SearchView
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -15,9 +14,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.shushufood.navigation.NavigationItem
 import com.example.shushufood.ui.screens.CartScreen
-import com.example.shushufood.ui.screens.HomeScreen
 import com.example.shushufood.ui.screens.ProfileScreen
 import com.example.shushufood.ui.screens.RecentScreen
+import com.example.shushufood.ui.screens.home.HomeScreen
+import com.example.shushufood.ui.screens.home.HomeViewModel
 import com.example.shushufood.ui.theme.AppTheme
 
 
@@ -76,7 +76,8 @@ fun BottomNavigationBar(navController: NavController) {
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
-            HomeScreen()
+            val homeViewModel = hiltViewModel<HomeViewModel>()
+            HomeScreen(homeViewModel)
         }
         composable(NavigationItem.Recent.route) {
             RecentScreen()
