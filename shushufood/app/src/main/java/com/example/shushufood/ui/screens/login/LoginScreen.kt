@@ -29,7 +29,12 @@ import com.example.shushufood.ui.screens.login.views.SignInView
 import com.example.shushufood.ui.screens.login.views.SignUpView
 import com.example.shushufood.ui.theme.AppTheme
 import com.example.shushufood.ui.theme.Inika
+import com.example.shushufood.utils.network.ApiService
 import androidx.compose.material.Text as Text
+
+private val apiService by lazy {
+    ApiService.create()
+}
 
 @Composable
 fun LoginScreen(
@@ -150,9 +155,6 @@ fun LoginScreen(
                             loginViewModel.obtainEvent(LoginEvent.PhoneNumberChanged(it))
                         },
                         onRegisterClick = {
-                            loginViewModel.obtainEvent(LoginEvent.LoginClicked)
-                        },
-                        onCancelClicked = {
                             loginViewModel.obtainEvent(LoginEvent.LoginClicked)
                         },
                     )

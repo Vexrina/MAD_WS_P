@@ -1,5 +1,6 @@
 package com.example.shushufood.utils.network
 
+import com.example.shushufood.utils.models.LoginRequestModel
 import com.example.shushufood.utils.models.MenuRequestModel
 import com.example.shushufood.utils.models.MenuResponseModel
 import io.ktor.client.*
@@ -39,6 +40,40 @@ class ApiServiceImpl(
             emptyList()
         }
     }
+
+    override suspend fun tryLogin(email: String, password: String): String {
+        val response = client.post{
+            url(ApiRoutes.LOGIN)
+            contentType(ContentType.Application.Json)
+            setBody(LoginRequestModel(email, password))
+        }
+        val token = response.body<String>()
+        return try{
+            token
+        } catch (ex: RedirectResponseException) {
+            // 3xx - responses
+            println("Error: ${ex.response.status.description}")
+            ""
+        } catch (ex: ClientRequestException) {
+            // 4xx - responses
+            println("Error: ${ex.response.status.description}")
+            ""
+        } catch (ex: ServerResponseException) {
+            // 5xx - response
+            println("Error: ${ex.response.status.description}")
+            ""
+        }
+    }
+
+    override suspend fun tryRegister(
+        email: String,
+        password: String,
+        phoneNumber: String,
+        fullName: String
+    ): String {
+        TODO("Not yet implemented")
+    }
+
 
 
 // Admin application feature

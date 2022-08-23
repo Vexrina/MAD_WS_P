@@ -63,7 +63,7 @@ class LoginViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent
     private fun loginClicked(){
         viewModelScope.launch(Dispatchers.IO){
             _viewState.postValue(_viewState.value?.copy(isProgress = true))
-            //delay(3000)
+            delay(3000)
             _viewState.postValue(_viewState.value?.copy(isProgress = false, loginAction = LoginAction.OpenDashBoard("qwerty")))
 
         }

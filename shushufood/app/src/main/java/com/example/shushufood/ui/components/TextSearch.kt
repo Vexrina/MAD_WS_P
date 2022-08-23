@@ -31,9 +31,10 @@ fun TextSearch(
     query: String,
     onQueryChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String,
+    placeholder: String = "Search...",
 ){
     TextField(
+        singleLine = true,
         value =query,
         onValueChange = onQueryChange,
         placeholder = {

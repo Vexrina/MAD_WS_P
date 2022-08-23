@@ -15,6 +15,10 @@ import io.ktor.serialization.kotlinx.json.*
 interface ApiService {
     suspend fun getProducts(query: String): List<MenuResponseModel>
 
+    suspend fun tryLogin(email: String, password: String): String
+
+    suspend fun tryRegister(email: String, password: String, phoneNumber: String, fullName: String): String
+
 //  Admin application feature
 //    suspend fun createProducts(productRequest: MenuRequestModel): MenuResponseModel?
 

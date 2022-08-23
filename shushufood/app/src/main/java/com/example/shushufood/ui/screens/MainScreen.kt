@@ -25,13 +25,6 @@ fun MainScreen(username: String){
     //var viewState by remember { mutableStateOf(SearchViewState()) }
     Scaffold(
 
-//        topBar = { TopBar{
-//                Row{
-//
-//                }
-//
-//            }
-//                 },
         bottomBar = { BottomNavigationBar(navController) },
         content = { padding -> // We have to pass the scaffold inner padding to our content. That's why we use Box.
 

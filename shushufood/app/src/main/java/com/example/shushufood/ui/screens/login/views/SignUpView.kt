@@ -25,7 +25,6 @@ fun SignUpView(
     onPasswordFieldChange: (String)->Unit,
     onPhoneNumberFieldChange: (String)->Unit,
     onFullNameFieldChange: (String)->Unit,
-    onCancelClicked: ()->Unit,
     onRegisterClick: ()-> Unit
 ){
     Column(modifier = Modifier.fillMaxSize()){
@@ -92,36 +91,6 @@ fun SignUpView(
             else {
                 Text(
                     text = stringResource(id = R.string.action_register),
-                    fontWeight = FontWeight.Medium,
-                    color = AppTheme.colors.primaryBackground,
-                    style = TextStyle(fontSize = 35.sp)
-                )
-            }
-        }
-        Button(
-            modifier = Modifier
-                .padding(5.dp)
-                .fillMaxWidth()
-                .height(60.dp),
-            onClick = {
-                if(!viewState.isProgress)
-                    onCancelClicked.invoke()
-            },
-            shape = RoundedCornerShape(size = 20.dp),
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = AppTheme.colors.primaryTextColor
-            )
-        )
-        {
-            if (viewState.isProgress){
-                CircularProgressIndicator(
-                    strokeWidth = 2.dp,
-                    color = AppTheme.colors.actionTextColor
-                )
-            }
-            else {
-                Text(
-                    text = stringResource(id = R.string.action_cancel),
                     fontWeight = FontWeight.Medium,
                     color = AppTheme.colors.primaryBackground,
                     style = TextStyle(fontSize = 35.sp)
