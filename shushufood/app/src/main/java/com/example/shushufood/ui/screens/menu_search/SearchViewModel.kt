@@ -9,10 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -21,20 +18,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.shushufood.R
-import com.example.shushufood.ui.theme.AppTheme
-import java.util.*
-import kotlin.collections.ArrayList
-import androidx.compose.runtime.getValue
-
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.shushufood.R
 import com.example.shushufood.common.EventHandler
 import com.example.shushufood.ui.screens.login.models.LoginEvent
 import com.example.shushufood.ui.screens.login.models.LoginViewState
+import com.example.shushufood.ui.theme.AppTheme
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.*
 import javax.inject.Inject
 
 

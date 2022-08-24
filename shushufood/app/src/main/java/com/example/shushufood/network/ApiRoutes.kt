@@ -1,4 +1,4 @@
-package com.example.shushufood.utils.network
+package com.example.shushufood.network
 
 object ApiRoutes {
     private const val BASE_URL = "http://10.0.2.2:8080"

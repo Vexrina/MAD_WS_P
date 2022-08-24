@@ -1,27 +1,20 @@
 package com.example.shushufood.ui.components
 
-import android.graphics.drawable.Icon
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-
+import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.MutableLiveData
 import com.example.shushufood.R
 import com.example.shushufood.ui.theme.AppTheme
 import com.example.shushufood.ui.theme.Inika
@@ -30,12 +23,15 @@ import com.example.shushufood.ui.theme.Inika
 fun TextSearch(
     query: String,
     onQueryChange: (String) -> Unit,
+    onClearClicked: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     placeholder: String = "Search...",
 ){
+
     TextField(
         singleLine = true,
-        value =query,
+        value = query,
         onValueChange = onQueryChange,
         placeholder = {
             Text(
@@ -49,14 +45,25 @@ fun TextSearch(
             )
         },
         modifier = modifier,
+        enabled = enabled,
         shape = RoundedCornerShape(100 ),
         trailingIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_search),
-                contentDescription = "search",
-                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp, end = 16.dp),
-                tint = AppTheme.colors.searchIconColor,
-            )
+            when (query.isEmpty()) {
+                true -> Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_search),
+                    contentDescription = "search",
+                    modifier = Modifier.padding(top = 8.dp, bottom = 8.dp, end = 16.dp),
+                    tint = AppTheme.colors.searchIconColor,
+                )
+                else -> Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_search_clear),
+                    contentDescription = "cancel search",
+                    tint = AppTheme.colors.primaryTextColor,
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp, end = 16.dp)
+                        .clickable(onClick = onClearClicked)
+                )
+            }
         },
         colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Transparent,

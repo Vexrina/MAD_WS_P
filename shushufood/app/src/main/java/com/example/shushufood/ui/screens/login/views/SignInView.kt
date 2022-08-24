@@ -13,13 +13,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shushufood.R
-import com.example.shushufood.common.isEmailValid
-import com.example.shushufood.ui.components.DTextField
 import com.example.shushufood.ui.components.TextInput
 import com.example.shushufood.ui.screens.login.models.LoginViewState
 import com.example.shushufood.ui.theme.AppTheme
 import com.example.shushufood.ui.theme.Inika
-import androidx.compose.material.Snackbar as S
 
 @Composable
 fun SignInView(

@@ -1,14 +1,13 @@
-package com.example.shushufood.utils.network
+package com.example.shushufood.network
 
-import com.example.shushufood.utils.models.LoginRequestModel
-import com.example.shushufood.utils.models.MenuRequestModel
-import com.example.shushufood.utils.models.MenuResponseModel
+import com.example.shushufood.network.models.LoginRequestModel
+import com.example.shushufood.network.models.MenuRequestModel
+import com.example.shushufood.network.models.MenuResponseModel
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import kotlinx.serialization.builtins.serializer
 
 class ApiServiceImpl(
     private val client: HttpClient
