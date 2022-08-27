@@ -79,6 +79,7 @@ fun Navigation(navController: NavHostController) {
             val homeViewModel = hiltViewModel<HomeViewModel>()
             HomeScreen(homeViewModel)
         }
+        composable()
         composable(NavigationItem.Recent.route) {
             RecentScreen()
         }

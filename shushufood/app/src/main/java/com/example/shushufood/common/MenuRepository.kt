@@ -20,6 +20,12 @@ class MenuRepository(private val database: MenuDao) {
         it.asDomainModel()
     }
 
+    fun menuItemByName(name: String): MenuResponseModel? {
+        return menuItems.value?.firstOrNull {
+            it.name == name
+        }
+    }
+
     suspend fun fetchMenu() {
         withContext(Dispatchers.IO) {
             val menu = apiService.getProducts("")

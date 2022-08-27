@@ -18,4 +18,8 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_register">Register Now!</string>
     <string name="request">What\'s your request?</string>
+    <string name="add_item">Add</string>
+    <string name="remove_items">Remove</string>
+    <string name="paycheck_summ">Total: </string>
+    <string name="make_order">Make an order</string>
 </resources>

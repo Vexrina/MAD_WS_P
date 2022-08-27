@@ -17,7 +17,11 @@ import com.example.shushufood.ui.theme.AppTheme
 import java.math.BigDecimal
 
 @Composable
-fun MenuCard(title: String, image_bmp: Bitmap, price: BigDecimal) {
+fun MenuCard(
+    title: String,
+    image_bmp: Bitmap,
+    price: BigDecimal
+) {
     var count = 0
     Surface(
         color = AppTheme.colors.systemButtonsColor,
@@ -25,7 +29,7 @@ fun MenuCard(title: String, image_bmp: Bitmap, price: BigDecimal) {
         modifier = Modifier
             .width(160.dp)
             .height(170.dp)
-            //.clickable {  }
+        //.clickable {  }
 
     ) {
         Box(
@@ -43,7 +47,10 @@ fun MenuCard(title: String, image_bmp: Bitmap, price: BigDecimal) {
                 modifier = Modifier.fillMaxSize()
             ) {
                 Box(
-                    modifier = Modifier.height(105.dp).width(140.dp).padding(top = 8.dp)
+                    modifier = Modifier
+                        .height(105.dp)
+                        .width(140.dp)
+                        .padding(top = 8.dp)
                 ) {
                     Image(
                         bitmap = image_bmp.asImageBitmap(),

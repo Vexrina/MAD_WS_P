@@ -1,7 +1,10 @@
 package com.example.shushufood.ui.screens.home
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.shushufood.common.EventHandler
 import com.example.shushufood.common.MenuRepository
 import com.example.shushufood.db.AppDatabase
@@ -61,6 +64,9 @@ class HomeViewModel @Inject constructor(
 
 
             } catch (networkError: IOException) {
+                if (menuItems.value?.isNotEmpty() == true){
+                    _viewState.postValue(_viewState.value?.copy(homeSubState = HomeSubState.Loaded))
+                }
                 _viewState.postValue(_viewState.value?.copy(homeSubState = HomeSubState.Failed))
             }
         }
