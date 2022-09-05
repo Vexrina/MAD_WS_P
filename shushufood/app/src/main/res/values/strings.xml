@@ -22,4 +22,6 @@
     <string name="remove_items">Remove</string>
     <string name="paycheck_summ">Total: </string>
     <string name="make_order">Make an order</string>
+    <string name="quantity">"Qty: "</string>
+    <string name="price">"Price: "</string>
 </resources>

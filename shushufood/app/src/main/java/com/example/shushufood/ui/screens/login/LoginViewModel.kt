@@ -17,13 +17,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent>{
-    private val _viewState = MutableLiveData(LoginViewState())
+    private val _viewState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState())
     val viewState: LiveData<LoginViewState> = _viewState
 
     override fun obtainEvent(event: LoginEvent) {
         when(event){
             LoginEvent.ActionClicked -> switchActionState()
-
+            LoginEvent.LoginActionInvoked -> loginActionInvoked()
             is LoginEvent.EmailChanged -> emailChanged(event.value)
             is LoginEvent.PasswordChanged -> passwordChanged(event.value)
             is LoginEvent.ForgetClicked -> forgetClicked()
@@ -41,6 +41,9 @@ class LoginViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent
             else -> Unit
         }
 
+    }
+    private fun loginActionInvoked(){
+        _viewState.postValue(_viewState.value?.copy(loginAction = LoginAction.None))
     }
     private fun fullNameChanged(value: String){
         _viewState.postValue(_viewState.value?.copy(fullNameValue = value))
@@ -63,7 +66,7 @@ class LoginViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent
     private fun loginClicked(){
         viewModelScope.launch(Dispatchers.IO){
             _viewState.postValue(_viewState.value?.copy(isProgress = true))
-            delay(1500)
+            delay(100)
             _viewState.postValue(_viewState.value?.copy(isProgress = false, loginAction = LoginAction.OpenDashBoard("qwerty")))
 
         }

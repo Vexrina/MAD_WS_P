@@ -10,14 +10,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.example.shushufood.common.MenuRepository
 import com.example.shushufood.navigation.NavigationItem
-import com.example.shushufood.ui.screens.CartScreen
+import com.example.shushufood.navigation.NavigationTree
 import com.example.shushufood.ui.screens.ProfileScreen
 import com.example.shushufood.ui.screens.RecentScreen
+import com.example.shushufood.ui.screens.cart.CartScreen
+import com.example.shushufood.ui.screens.cart.CartViewModel
 import com.example.shushufood.ui.screens.home.HomeScreen
 import com.example.shushufood.ui.screens.home.HomeViewModel
+import com.example.shushufood.ui.screens.menu_item.MenuItemScreen
 import com.example.shushufood.ui.theme.AppTheme
 
 
@@ -77,17 +83,26 @@ fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
             val homeViewModel = hiltViewModel<HomeViewModel>()
-            HomeScreen(homeViewModel)
+            HomeScreen(navController, homeViewModel)
         }
-        composable()
         composable(NavigationItem.Recent.route) {
             RecentScreen()
         }
         composable(NavigationItem.Cart.route) {
-            CartScreen()
+            val cartViewModel = hiltViewModel<CartViewModel>()
+            CartScreen(cartViewModel/*, Cart.cartItems.value*/)
         }
         composable(NavigationItem.Profile.route) {
             ProfileScreen()
+        }
+        composable(
+            route = "${NavigationTree.MenuItem.name}/{menuItem_name}",
+            arguments = listOf(
+                navArgument("menuItem_name") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val name = backStackEntry.arguments?.getString("menuItem_name").orEmpty()
+            MenuItemScreen(menuItem = MenuRepository.menuItemByName(name))
         }
     }
 }

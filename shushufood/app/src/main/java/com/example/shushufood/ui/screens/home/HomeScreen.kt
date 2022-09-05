@@ -1,11 +1,14 @@
 package com.example.shushufood.ui.screens.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.shushufood.network.ApiService
 import com.example.shushufood.ui.components.TextSearch
 import com.example.shushufood.ui.screens.home.models.HomeEvent
@@ -22,6 +25,7 @@ private val apiService by lazy {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
+    navController: NavController,
     homeViewModel: HomeViewModel
 ) {
 
@@ -42,7 +46,7 @@ fun HomeScreen(
                     homeViewModel.obtainEvent(HomeEvent.SearchChanged(it))
                 },
                 onClearClicked = {
-                                 homeViewModel.obtainEvent(HomeEvent.SearchClearClicked)
+                    homeViewModel.obtainEvent(HomeEvent.SearchClearClicked)
                 },
                 placeholder = "Поиск по меню...",
                 enabled = when (homeSubState) {
@@ -59,13 +63,12 @@ fun HomeScreen(
                 HomeSubState.Failed -> FailedView {
                     homeViewModel.obtainEvent(HomeEvent.RetryMenuLoadingClicked)
                 }
-                HomeSubState.Loaded -> LoadedView(this@with, products)
-                }
+                HomeSubState.Loaded -> LoadedView(navController, this@with, homeViewModel, products)
             }
         }
-
-//            LaunchedEffect(queryInput) {
-//                products = apiService.getProducts(queryInput)
-//            }
     }
+
+}
+
+
 

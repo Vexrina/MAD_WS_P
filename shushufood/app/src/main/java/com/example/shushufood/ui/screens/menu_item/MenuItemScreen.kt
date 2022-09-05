@@ -1,6 +1,5 @@
-package com.example.shushufood.ui.screens.home
+package com.example.shushufood.ui.screens.menu_item
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,28 +8,28 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shushufood.R
+import com.example.shushufood.common.Cart
 import com.example.shushufood.network.models.MenuResponseModel
-import com.example.shushufood.ui.screens.cart.CartViewModel
+import com.example.shushufood.ui.components.ItemCounter
 import com.example.shushufood.utils.byteArrayToBmp
+
+
 
 @Composable
 fun MenuItemScreen(
-    menuItem: MenuResponseModel,
-    cartViewModel: CartViewModel
+    menuItem: MenuResponseModel
 ) {
 
-    val context = LocalContext.current
-//    val viewState = menuItemViewModel.viewState.observeAsState(MenuItemViewState())
+    val viewState = Cart.cartItems.observeAsState()
 
-//    with(viewState.value) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -47,18 +46,41 @@ fun MenuItemScreen(
             modifier = Modifier.padding(top = 8.dp)
         )
 
-        Button(onClick = {
-            Toast.makeText(context, "${menuItem.name} added to your cart", Toast.LENGTH_SHORT)
 
-        }) {
-            Text(
-                text = stringResource(id = R.string.add_item)
+
+
+        if (viewState.value?.getOrDefault(menuItem, 0) == 0) {
+            Button(onClick = {
+                Cart.addItem(menuItem)
+            }) {
+                Text(
+                    text = stringResource(id = R.string.add_item)
+                )
+            }
+        } else {
+            ItemCounter(
+                count = viewState.value!!.getOrDefault(menuItem, 0),
+                onDecreaseClicked = {
+                    Cart.removeItem(menuItem)
+//                    quantity -= 1
+                },
+                onIncreaseClicked = {
+                    Cart.addItem(menuItem)
+//                    quantity += 1
+                }
             )
         }
-//        Button(onClick = { /*TODO*/ }) {
-//            Text(text = stringResource(id = R.string.remove_items))
-//        }
-//        }
+        Button(onClick = {
+            Cart.removeItem(menuItem = menuItem, true)
+//            quantity = 0
+        }) {
+            Text(text = stringResource(id = R.string.remove_items))
+        }
     }
+//    LaunchedEffect(key1 = true) {
+//        quantity = Cart.cartItems.value?.getOrDefault(menuItem, 0)!!
+//    }
+
 }
+
 
