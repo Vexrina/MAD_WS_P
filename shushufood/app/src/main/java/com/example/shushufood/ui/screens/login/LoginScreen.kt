@@ -5,7 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.*
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
@@ -20,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.shushufood.R
 import com.example.shushufood.navigation.NavigationTree
+import com.example.shushufood.network.ApiService
 import com.example.shushufood.ui.screens.login.models.LoginAction
 import com.example.shushufood.ui.screens.login.models.LoginEvent
 import com.example.shushufood.ui.screens.login.models.LoginSubState
@@ -29,8 +33,6 @@ import com.example.shushufood.ui.screens.login.views.SignInView
 import com.example.shushufood.ui.screens.login.views.SignUpView
 import com.example.shushufood.ui.theme.AppTheme
 import com.example.shushufood.ui.theme.Inika
-import com.example.shushufood.network.ApiService
-import androidx.compose.material.Text as Text
 
 private val apiService by lazy {
     ApiService.create()
@@ -167,7 +169,7 @@ fun LoginScreen(
         when (val action = viewState.value.loginAction){
             is LoginAction.OpenDashBoard -> {
                 navController.navigate("${NavigationTree.Main.name}/${action.username}"){
-                    popUpTo(NavigationTree.Login.name)
+                    popUpTo(0)
                 }
             }
             else -> Unit
@@ -175,7 +177,7 @@ fun LoginScreen(
     }
     DisposableEffect(key1 = Unit, effect ={
         onDispose {
-            loginViewModel.obtainEvent(LoginEvent.LoginClicked)
+            loginViewModel.obtainEvent(LoginEvent.LoginActionInvoked)
         }
     } )
 

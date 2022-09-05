@@ -8,7 +8,6 @@ import com.example.shushufood.utils.Converters
 import java.math.BigDecimal
 
 
-
 @Entity(primaryKeys = ["name", "category"], tableName = "menu")
 data class DatabaseMenuItem(
     val name: String,

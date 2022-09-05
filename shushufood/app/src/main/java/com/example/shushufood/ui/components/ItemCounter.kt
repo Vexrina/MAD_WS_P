@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun ItemCounter(
-    count: Short,
+    count: Int,
     onDecreaseClicked: () -> Unit,
     onIncreaseClicked: () -> Unit,
 ){

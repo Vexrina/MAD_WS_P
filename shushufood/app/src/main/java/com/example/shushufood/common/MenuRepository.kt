@@ -1,8 +1,9 @@
 package com.example.shushufood.common
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.example.shushufood.db.MenuDao
+import com.example.shushufood.db.AppDatabase
 import com.example.shushufood.db.asDomainModel
 import com.example.shushufood.network.ApiService
 import com.example.shushufood.network.models.MenuResponseModel
@@ -10,18 +11,19 @@ import com.example.shushufood.network.models.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MenuRepository(private val database: MenuDao) {
+
+object MenuRepository {
 
     private val apiService by lazy {
         ApiService.create()
     }
 
-    val menuItems: LiveData<List<MenuResponseModel>> = Transformations.map(database.getMenu()){
-        it.asDomainModel()
-    }
+    private lateinit var database: AppDatabase
 
-    fun menuItemByName(name: String): MenuResponseModel? {
-        return menuItems.value?.firstOrNull {
+    lateinit var menuItems: LiveData<List<MenuResponseModel>>
+
+    fun menuItemByName(name: String): MenuResponseModel {
+        return menuItems.value!!.first() {
             it.name == name
         }
     }
@@ -30,9 +32,19 @@ class MenuRepository(private val database: MenuDao) {
         withContext(Dispatchers.IO) {
             val menu = apiService.getProducts("")
 
-            database.insertAll(
+            database.menuDao().insertAll(
                 menu.asDatabaseModel()
             )
         }
+    }
+
+    operator fun invoke(context: Context): MenuRepository {
+        //...
+        database = AppDatabase.getInstance(context)
+        menuItems = Transformations.map(database.menuDao().getMenu()){
+            it.asDomainModel()
+        }
+
+        return this
     }
 }

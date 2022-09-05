@@ -8,20 +8,28 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.shushufood.navigation.NavigationTree
 import com.example.shushufood.network.models.MenuResponseModel
 import com.example.shushufood.ui.components.MenuCard
+import com.example.shushufood.ui.screens.home.HomeViewModel
+import com.example.shushufood.ui.screens.home.models.HomeEvent
 import com.example.shushufood.ui.screens.home.models.HomeViewState
+import com.example.shushufood.ui.screens.home.models.ItemClickAction
 import com.example.shushufood.utils.byteArrayToBmp
 
 @Composable
 fun LoadedView(
+    navController: NavController,
     viewState: HomeViewState,
+    viewModel: HomeViewModel,
     products: List<MenuResponseModel>?
 ) {
-
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -35,14 +43,34 @@ fun LoadedView(
     {
         products?.let {
             items(it.filter { product ->
-                product.name.contains(viewState.searchValue, ignoreCase = true) }
+                product.name.contains(viewState.searchValue, ignoreCase = true)
+            }
             ) { product ->
                 MenuCard(
                     title = product.name,
                     image_bmp = byteArrayToBmp(product.image),
-                    price = product.price
+                    price = product.price,
+                    onClick = { viewModel.obtainEvent(HomeEvent.MenuItemClicked(product.name)) }
                 )
             }
         }
     }
+    LaunchedEffect(key1 = viewState.itemClickAction) {
+        when (val action = viewState.itemClickAction) {
+            is ItemClickAction.OpenItemPicker
+            -> {
+                navController.navigate("${NavigationTree.MenuItem.name}/${action.item_name}")
+            }
+            else -> Unit
+        }
+    }
+    DisposableEffect(key1 = Unit) {
+        onDispose {
+            viewModel.obtainEvent(HomeEvent.ItemActionInvoked)
+        }
+    }
 }
+
+
+/*
+navController.navigate("${NavigationTree.MenuItem.name}/{${product.name}}")*/

@@ -20,7 +20,8 @@ import java.math.BigDecimal
 fun MenuCard(
     title: String,
     image_bmp: Bitmap,
-    price: BigDecimal
+    price: BigDecimal,
+    onClick: () -> Unit
 ) {
     var count = 0
     Surface(
@@ -40,6 +41,7 @@ fun MenuCard(
                 .clickable {
                     println("Click ${count}!")
                     count++
+                    onClick.invoke()
                 }
         ) {
             Column(
