@@ -1,6 +1,5 @@
 package ru.shushufood.features.menu
 
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import ru.shushufood.features.utils.BigDecimalSerializer
 import java.math.BigDecimal

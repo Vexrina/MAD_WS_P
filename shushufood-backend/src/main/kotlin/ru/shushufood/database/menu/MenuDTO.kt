@@ -1,6 +1,5 @@
 package ru.shushufood.database.menu
 
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import ru.shushufood.features.menu.CreateMenuRequest
 import ru.shushufood.features.menu.CreateMenuResponse
