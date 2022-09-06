@@ -1,4 +1,5 @@
 package ru.shushufood.features.register
+
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -8,6 +9,7 @@ data class RegisterReceiveRemote(
     val email: String,
     val phone_number: String
 )
+
 @Serializable
 data class RegisterResponseRemote(
     val token: String

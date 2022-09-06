@@ -13,20 +13,20 @@ import ru.shushufood.features.utils.isValidEmail
 import java.util.*
 
 class RegisterController(val call: ApplicationCall) {
-    suspend fun registerNewUser(){
+    suspend fun registerNewUser() {
         val registerReceiveRemote = call.receive<RegisterReceiveRemote>()
-        if (!registerReceiveRemote.email.isValidEmail()){
+        if (!registerReceiveRemote.email.isValidEmail()) {
             call.respond(HttpStatusCode.BadRequest, "Email is not valid")
         }
 
 
         val userDTO = Users.fetchUser(registerReceiveRemote.login)
-        if(userDTO != null) {
-                call.respond(HttpStatusCode.Conflict, "User already exist")
+        if (userDTO != null) {
+            call.respond(HttpStatusCode.Conflict, "User already exist")
         } else {
             val token = UUID.randomUUID().toString()
 
-            try{
+            try {
                 Users.insert(
                     UserDTO(
                         login = registerReceiveRemote.login,
@@ -35,8 +35,7 @@ class RegisterController(val call: ApplicationCall) {
                         phone_number = registerReceiveRemote.phone_number
                     )
                 )
-            }
-            catch (e: ExposedSQLException){
+            } catch (e: ExposedSQLException) {
                 call.respond(HttpStatusCode.Conflict, "User already exist")
             }
 

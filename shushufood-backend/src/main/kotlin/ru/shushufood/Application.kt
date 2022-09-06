@@ -11,8 +11,10 @@ import ru.shushufood.plugins.configureRouting
 import ru.shushufood.plugins.configureSerialization
 
 fun main() {
-    Database.connect(url = "jdbc:postgresql://localhost:5432/shushufood", driver = "org.postgresql.Driver",
-    user = "postgres", password = "admin")
+    Database.connect(
+        url = "jdbc:postgresql://localhost:5432/shushufood", driver = "org.postgresql.Driver",
+        user = "postgres", password = "admin"
+    )
     embeddedServer(CIO, port = 8080, host = "localhost") {
         configureMenuRouting()
         configureRouting()

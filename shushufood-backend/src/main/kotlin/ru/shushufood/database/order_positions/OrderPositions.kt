@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import ru.shushufood.database.menu.Menu
 import ru.shushufood.database.order.Orders
 
-object OrderPositions: Table("order_positions") {
+object OrderPositions : Table("order_positions") {
     private val order_id = OrderPositions.integer("order_id").references(Orders.id)
     private val menu_name = OrderPositions.varchar("menu_name", 25).references(Menu.name)
     private val menu_category = OrderPositions.integer("menu_category").references(Menu.category)
@@ -24,7 +24,7 @@ object OrderPositions: Table("order_positions") {
         }
     }
 
-    fun fetchPositions(orderId: Int) : List<OrderPositionsDTO>? {
+    fun fetchPositions(orderId: Int): List<OrderPositionsDTO>? {
         return try {
             transaction {
                 OrderPositions.selectAll().toList().map {

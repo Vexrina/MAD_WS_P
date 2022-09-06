@@ -9,7 +9,7 @@ data class FetchMenuResponse(
 )
 
 @Serializable
-data class  MenuResponse(
+data class MenuResponse(
     val name: String,
     val price: Int,
     val image: String,
