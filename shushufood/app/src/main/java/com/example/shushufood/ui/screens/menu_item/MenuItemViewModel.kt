@@ -13,15 +13,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MenuItemViewModel @Inject constructor(
-): ViewModel(), EventHandler<MenuItemEvent> {
+) : ViewModel(), EventHandler<MenuItemEvent> {
     private val _viewState = MutableLiveData(MenuItemViewState())
     val viewState: LiveData<MenuItemViewState> = _viewState
 
 
-
-
     override fun obtainEvent(event: MenuItemEvent) {
-        when(event){
+        when (event) {
             MenuItemEvent.AddClicked -> TODO()
             MenuItemEvent.DecreaseClicked -> TODO()
             is MenuItemEvent.IncreaseClicked -> increaseCounter(event.value)
@@ -37,9 +35,11 @@ class MenuItemViewModel @Inject constructor(
     private fun decreaseCounter() {
 
     }
+
     private fun addItem() {
 
     }
+
     private fun removeItem() {
 
     }

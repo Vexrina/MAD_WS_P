@@ -16,12 +16,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent>{
+class LoginViewModel @Inject constructor() : ViewModel(), EventHandler<LoginEvent> {
     private val _viewState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState())
     val viewState: LiveData<LoginViewState> = _viewState
 
     override fun obtainEvent(event: LoginEvent) {
-        when(event){
+        when (event) {
             LoginEvent.ActionClicked -> switchActionState()
             LoginEvent.LoginActionInvoked -> loginActionInvoked()
             is LoginEvent.EmailChanged -> emailChanged(event.value)
@@ -34,40 +34,53 @@ class LoginViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent
         }
     }
 
-    private fun switchActionState(){
-        when(_viewState.value?.loginSubState){
+    private fun switchActionState() {
+        when (_viewState.value?.loginSubState) {
             LoginSubState.SignIn -> _viewState.postValue(_viewState.value?.copy(loginSubState = LoginSubState.SignUp))
             LoginSubState.SignUp -> _viewState.postValue(_viewState.value?.copy(loginSubState = LoginSubState.SignIn))
             else -> Unit
         }
 
     }
-    private fun loginActionInvoked(){
+
+    private fun loginActionInvoked() {
         _viewState.postValue(_viewState.value?.copy(loginAction = LoginAction.None))
     }
-    private fun fullNameChanged(value: String){
+
+    private fun fullNameChanged(value: String) {
         _viewState.postValue(_viewState.value?.copy(fullNameValue = value))
     }
-    private fun phoneChanged(value: String){
+
+    private fun phoneChanged(value: String) {
         _viewState.postValue(_viewState.value?.copy(phoneNumberValue = value))
     }
-    private fun emailChanged(value: String){
+
+    private fun emailChanged(value: String) {
         _viewState.postValue(_viewState.value?.copy(emailValue = value))
     }
-    private fun passwordChanged(value: String){
+
+    private fun passwordChanged(value: String) {
         _viewState.postValue(_viewState.value?.copy(passwordValue = value))
     }
-    private fun forgetClicked(){
+
+    private fun forgetClicked() {
         _viewState.postValue(_viewState.value?.copy(loginSubState = LoginSubState.Forgot))
     }
-    private fun checkboxClicked(value: Boolean){
+
+    private fun checkboxClicked(value: Boolean) {
         _viewState.postValue(_viewState.value?.copy(rememberMeChecked = value))
     }
-    private fun loginClicked(){
-        viewModelScope.launch(Dispatchers.IO){
+
+    private fun loginClicked() {
+        viewModelScope.launch(Dispatchers.IO) {
             _viewState.postValue(_viewState.value?.copy(isProgress = true))
             delay(100)
-            _viewState.postValue(_viewState.value?.copy(isProgress = false, loginAction = LoginAction.OpenDashBoard("qwerty")))
+            _viewState.postValue(
+                _viewState.value?.copy(
+                    isProgress = false,
+                    loginAction = LoginAction.OpenDashBoard("qwerty")
+                )
+            )
 
         }
     }

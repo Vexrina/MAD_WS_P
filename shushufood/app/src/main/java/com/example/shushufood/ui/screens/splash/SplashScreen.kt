@@ -12,16 +12,16 @@ import com.example.shushufood.R
 import com.example.shushufood.navigation.NavigationTree
 
 @Composable
-fun SplashScreen(navController: NavController){
-        Image(
-            painter = painterResource(R.drawable.splash),
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .fillMaxSize()
-        )
+fun SplashScreen(navController: NavController) {
+    Image(
+        painter = painterResource(R.drawable.splash),
+        contentDescription = null,
+        contentScale = ContentScale.FillBounds,
+        modifier = Modifier
+            .fillMaxSize()
+    )
     //Thread.sleep(3000)
-   LaunchedEffect(key1 = Unit, block ={
+    LaunchedEffect(key1 = Unit, block = {
         navController.navigate(NavigationTree.Login.name)//Main to Login when finish
     })
 }

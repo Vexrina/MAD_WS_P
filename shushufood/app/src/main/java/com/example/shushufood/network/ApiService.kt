@@ -15,7 +15,12 @@ interface ApiService {
 
     suspend fun tryLogin(email: String, password: String): String
 
-    suspend fun tryRegister(email: String, password: String, phoneNumber: String, fullName: String): String
+    suspend fun tryRegister(
+        email: String,
+        password: String,
+        phoneNumber: String,
+        fullName: String
+    ): String
 
 //  Admin application feature
 //    suspend fun createProducts(productRequest: MenuRequestModel): MenuResponseModel?

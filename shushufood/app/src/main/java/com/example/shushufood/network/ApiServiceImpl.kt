@@ -41,13 +41,13 @@ class ApiServiceImpl(
     }
 
     override suspend fun tryLogin(email: String, password: String): String {
-        val response = client.post{
+        val response = client.post {
             url(ApiRoutes.LOGIN)
             contentType(ContentType.Application.Json)
             setBody(LoginRequestModel(email, password))
         }
         val token = response.body<String>()
-        return try{
+        return try {
             token
         } catch (ex: RedirectResponseException) {
             // 3xx - responses
@@ -72,7 +72,6 @@ class ApiServiceImpl(
     ): String {
         TODO("Not yet implemented")
     }
-
 
 
 // Admin application feature

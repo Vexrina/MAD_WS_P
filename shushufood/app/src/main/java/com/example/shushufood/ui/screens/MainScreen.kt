@@ -11,7 +11,7 @@ import com.example.shushufood.ui.components.Navigation
 import com.example.shushufood.ui.theme.AppTheme
 
 @Composable
-fun MainScreen(username: String){
+fun MainScreen(username: String) {
     val navController = rememberNavController()
     //var viewState by remember { mutableStateOf(SearchViewState()) }
     Scaffold(

@@ -14,7 +14,10 @@ import com.example.shushufood.ui.screens.splash.SplashScreen
 fun ApplicationScreen() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "${NavigationTree.Main.name}/{username}") {
+    NavHost(
+        navController = navController,
+        startDestination = "${NavigationTree.Main.name}/{username}"
+    ) {
         composable(NavigationTree.Splash.name) { SplashScreen(navController) }
         composable(NavigationTree.Login.name) {
             val loginViewModel = hiltViewModel<LoginViewModel>()
@@ -24,7 +27,7 @@ fun ApplicationScreen() {
             MainScreen(backStackEntry.arguments?.getString("username").orEmpty())
 
         }
-        
+
     }
 
 }

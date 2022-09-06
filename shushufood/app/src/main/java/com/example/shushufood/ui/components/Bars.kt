@@ -28,7 +28,7 @@ import com.example.shushufood.ui.theme.AppTheme
 
 
 @Composable
-fun TopBar(content: @Composable RowScope.() -> Unit){
+fun TopBar(content: @Composable RowScope.() -> Unit) {
     TopAppBar(
         backgroundColor = AppTheme.colors.primaryBackground,
         contentColor = Color.White,
@@ -108,6 +108,6 @@ fun Navigation(navController: NavHostController) {
 }
 
 @Composable
-fun SearchView(state: MutableLiveData<TextFieldValue>){
+fun SearchView(state: MutableLiveData<TextFieldValue>) {
 
 }

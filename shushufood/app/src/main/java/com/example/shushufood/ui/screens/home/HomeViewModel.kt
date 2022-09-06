@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     application: Application
-): AndroidViewModel(application), EventHandler<HomeEvent> {
+) : AndroidViewModel(application), EventHandler<HomeEvent> {
     private val _viewState = MutableLiveData(HomeViewState())
     val viewState: LiveData<HomeViewState> = _viewState
 
@@ -36,7 +36,7 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun obtainEvent(event: HomeEvent) {
-        when(event){
+        when (event) {
             HomeEvent.ItemActionInvoked -> itemActionInvoked()
             HomeEvent.SearchClearClicked -> clearSearch()
             HomeEvent.RetryMenuLoadingClicked -> refreshMenuFromRepository()
@@ -49,7 +49,7 @@ class HomeViewModel @Inject constructor(
         _viewState.postValue(_viewState.value?.copy(itemClickAction = ItemClickAction.None))
     }
 
-    private fun clearSearch(){
+    private fun clearSearch() {
         _viewState.postValue(_viewState.value?.copy(searchValue = ""))
     }
 
@@ -58,7 +58,13 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun menuItemClicked(value: String) {
-        _viewState.postValue(_viewState.value?.copy(itemClickAction = ItemClickAction.OpenItemPicker(value)))
+        _viewState.postValue(
+            _viewState.value?.copy(
+                itemClickAction = ItemClickAction.OpenItemPicker(
+                    value
+                )
+            )
+        )
 
     }
 
@@ -71,7 +77,7 @@ class HomeViewModel @Inject constructor(
 
 
             } catch (networkError: IOException) {
-                if (menuItems.value?.isNotEmpty() == true){
+                if (menuItems.value?.isNotEmpty() == true) {
                     _viewState.postValue(_viewState.value?.copy(homeSubState = HomeSubState.Loaded))
                 }
                 _viewState.postValue(_viewState.value?.copy(homeSubState = HomeSubState.Failed))

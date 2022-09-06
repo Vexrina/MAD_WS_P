@@ -27,7 +27,7 @@ fun TextSearch(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     placeholder: String = "Search...",
-){
+) {
 
     TextField(
         singleLine = true,
@@ -46,7 +46,7 @@ fun TextSearch(
         },
         modifier = modifier,
         enabled = enabled,
-        shape = RoundedCornerShape(100 ),
+        shape = RoundedCornerShape(100),
         trailingIcon = {
             when (query.isEmpty()) {
                 true -> Icon(
