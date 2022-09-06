@@ -25,7 +25,7 @@ fun CartScreen(
 //    cartProducts: Map<MenuResponseModel, Int>?
 ) {
 
-    val viewState = Cart.cartItems.observeAsState()
+    val cartState = Cart.cartItems.observeAsState()
 
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -34,10 +34,12 @@ fun CartScreen(
                 .weight(1f)
                 .fillMaxWidth()
         ) {
-            viewState.value?.forEach {
+            cartState.value?.toList()?.sortedBy { it.first.category }?.toMap()?.forEach {
                 item {
                     Row(
-                        modifier = Modifier.fillParentMaxWidth().weight(1f)
+                        modifier = Modifier
+                            .fillParentMaxWidth()
+                            .weight(1f)
                     ) {
                         Column(
                             modifier = Modifier.weight(1f)
@@ -95,7 +97,10 @@ fun CartScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = stringResource(id = R.string.paycheck_summ) + Cart.cartTotalPrice,
+                    text = stringResource(id = R.string.paycheck_summ) + cartState.value?.toList()
+                        ?.map {
+                            it.first.price * BigDecimal(it.second)
+                        }?.sum(),
                 )
             }
             Box(
@@ -111,5 +116,13 @@ fun CartScreen(
             }
         }
     }
+}
+
+private fun List<BigDecimal>.sum(): BigDecimal {
+    var sum = BigDecimal(0)
+    this.forEach {
+        sum += it
+    }
+    return sum
 }
 
