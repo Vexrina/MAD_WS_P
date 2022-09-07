@@ -9,12 +9,12 @@ import androidx.compose.runtime.staticCompositionLocalOf
 @Composable
 fun ShushufoodTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalColorProvider provides  lightPalette,
+        LocalColorProvider provides lightPalette,
         content = content
     )
 }
 
-object AppTheme{
+object AppTheme {
     val colors: Colors
         @Composable
         @ReadOnlyComposable

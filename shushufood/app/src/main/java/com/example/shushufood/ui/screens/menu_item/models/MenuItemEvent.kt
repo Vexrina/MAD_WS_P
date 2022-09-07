@@ -5,6 +5,6 @@ import com.example.shushufood.network.models.MenuResponseModel
 sealed class MenuItemEvent {
     object DecreaseClicked : MenuItemEvent()
     data class IncreaseClicked(val value: MenuResponseModel) : MenuItemEvent()
-    object RemoveClicked: MenuItemEvent()
-    object AddClicked: MenuItemEvent()
+    object RemoveClicked : MenuItemEvent()
+    object AddClicked : MenuItemEvent()
 }

@@ -22,7 +22,6 @@ import com.example.shushufood.ui.components.ItemCounter
 import com.example.shushufood.utils.byteArrayToBmp
 
 
-
 @Composable
 fun MenuItemScreen(
     menuItem: MenuResponseModel

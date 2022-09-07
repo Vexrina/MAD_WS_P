@@ -20,14 +20,15 @@ fun TextInput(
     secureText: Boolean = false,
     enabled: Boolean = true,
     onTextFieldChange: (String) -> Unit
-){
+) {
     Column(modifier = modifier)
-    {   Text(
-        text = header,
-        fontFamily = Inika,
-        color = AppTheme.colors.primaryTextColor,
-        fontWeight = FontWeight.Medium
-    )
+    {
+        Text(
+            text = header,
+            fontFamily = Inika,
+            color = AppTheme.colors.primaryTextColor,
+            fontWeight = FontWeight.Medium
+        )
         DTextField(
             enabled = enabled,
             modifier = Modifier

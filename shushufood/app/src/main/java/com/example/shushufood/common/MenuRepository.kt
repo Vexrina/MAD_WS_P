@@ -23,7 +23,7 @@ object MenuRepository {
     lateinit var menuItems: LiveData<List<MenuResponseModel>>
 
     fun menuItemByName(name: String): MenuResponseModel {
-        return menuItems.value!!.first() {
+        return menuItems.value!!.first {
             it.name == name
         }
     }
@@ -41,7 +41,7 @@ object MenuRepository {
     operator fun invoke(context: Context): MenuRepository {
         //...
         database = AppDatabase.getInstance(context)
-        menuItems = Transformations.map(database.menuDao().getMenu()){
+        menuItems = Transformations.map(database.menuDao().getMenu()) {
             it.asDomainModel()
         }
 

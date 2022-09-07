@@ -21,48 +21,48 @@ import com.example.shushufood.ui.theme.AppTheme
 @Composable
 fun SignUpView(
     viewState: LoginViewState,
-    onEmailFieldChange: (String)->Unit,
-    onPasswordFieldChange: (String)->Unit,
-    onPhoneNumberFieldChange: (String)->Unit,
-    onFullNameFieldChange: (String)->Unit,
-    onRegisterClick: ()-> Unit
-){
-    Column(modifier = Modifier.fillMaxSize()){
+    onEmailFieldChange: (String) -> Unit,
+    onPasswordFieldChange: (String) -> Unit,
+    onPhoneNumberFieldChange: (String) -> Unit,
+    onFullNameFieldChange: (String) -> Unit,
+    onRegisterClick: () -> Unit
+) {
+    Column(modifier = Modifier.fillMaxSize()) {
         TextInputForSignUp(
             modifier = Modifier.padding(top = 0.dp),
-            header= stringResource(id = R.string.email_hint),
+            header = stringResource(id = R.string.email_hint),
             textFieldValue = viewState.emailValue,
             enabled = !viewState.isProgress,
             onTextFieldChange = {
-                if(!viewState.isProgress) onEmailFieldChange.invoke(it)
+                if (!viewState.isProgress) onEmailFieldChange.invoke(it)
             },
         )
         TextInputForSignUp(
             modifier = Modifier.padding(top = 0.dp),
-            header= stringResource(id = R.string.password_hint),
+            header = stringResource(id = R.string.password_hint),
             textFieldValue = viewState.passwordValue,
-            onTextFieldChange ={
-                if(!viewState.isProgress) onPasswordFieldChange.invoke(it)
+            onTextFieldChange = {
+                if (!viewState.isProgress) onPasswordFieldChange.invoke(it)
             },
             secureText = true,
             enabled = !viewState.isProgress
         )
         TextInputForSignUp(
             modifier = Modifier.padding(top = 0.dp),
-            header= stringResource(id = R.string.full_name_hint),
+            header = stringResource(id = R.string.full_name_hint),
             textFieldValue = viewState.fullNameValue,
-            onTextFieldChange ={
-                if(!viewState.isProgress) onFullNameFieldChange.invoke(it)
+            onTextFieldChange = {
+                if (!viewState.isProgress) onFullNameFieldChange.invoke(it)
             },
             secureText = false,
             enabled = !viewState.isProgress
         )
         TextInputForSignUp(
             modifier = Modifier.padding(top = 0.dp),
-            header= stringResource(id = R.string.phone_number_hint),
+            header = stringResource(id = R.string.phone_number_hint),
             textFieldValue = viewState.phoneNumberValue,
-            onTextFieldChange ={
-                if(!viewState.isProgress) onPhoneNumberFieldChange.invoke(it)
+            onTextFieldChange = {
+                if (!viewState.isProgress) onPhoneNumberFieldChange.invoke(it)
             },
             secureText = false,
             enabled = !viewState.isProgress
@@ -73,7 +73,7 @@ fun SignUpView(
                 .fillMaxWidth()
                 .height(60.dp),
             onClick = {
-                if(!viewState.isProgress)
+                if (!viewState.isProgress)
                     onRegisterClick.invoke()
             },
             shape = RoundedCornerShape(size = 20.dp),
@@ -82,13 +82,12 @@ fun SignUpView(
             )
         )
         {
-            if (viewState.isProgress){
+            if (viewState.isProgress) {
                 CircularProgressIndicator(
                     strokeWidth = 2.dp,
                     color = AppTheme.colors.actionTextColor
                 )
-            }
-            else {
+            } else {
                 Text(
                     text = stringResource(id = R.string.action_register),
                     fontWeight = FontWeight.Medium,

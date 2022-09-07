@@ -10,10 +10,10 @@ fun ItemCounter(
     count: Int,
     onDecreaseClicked: () -> Unit,
     onIncreaseClicked: () -> Unit,
-){
+) {
 
-    Row{
-        Button(onClick = onDecreaseClicked ) {
+    Row {
+        Button(onClick = onDecreaseClicked) {
             Text(text = "-")
         }
         Text(

@@ -21,36 +21,36 @@ import com.example.shushufood.ui.theme.Inika
 @Composable
 fun SignInView(
     viewState: LoginViewState,
-    onLoginFieldChange: (String)->Unit,
-    onPasswordFieldChange: (String)->Unit,
-    onCheckedChange: (Boolean)-> Unit,
-    onForgetClick: ()->Unit,
-    onLoginClick: ()-> Unit
-){
-    Column(modifier = Modifier.fillMaxSize()){
+    onLoginFieldChange: (String) -> Unit,
+    onPasswordFieldChange: (String) -> Unit,
+    onCheckedChange: (Boolean) -> Unit,
+    onForgetClick: () -> Unit,
+    onLoginClick: () -> Unit
+) {
+    Column(modifier = Modifier.fillMaxSize()) {
         TextInput(
             modifier = Modifier.padding(top = 20.dp),
-            header= stringResource(id = R.string.email_hint),
+            header = stringResource(id = R.string.email_hint),
             textFieldValue = viewState.emailValue,
             enabled = !viewState.isProgress,
             onTextFieldChange = {
-                if(!viewState.isProgress) onLoginFieldChange.invoke(it)
+                if (!viewState.isProgress) onLoginFieldChange.invoke(it)
             },
-            )
+        )
         TextInput(
             modifier = Modifier.padding(top = 10.dp),
-            header= stringResource(id = R.string.password_hint),
+            header = stringResource(id = R.string.password_hint),
             textFieldValue = viewState.passwordValue,
-            onTextFieldChange ={
-                if(!viewState.isProgress) onPasswordFieldChange.invoke(it)
+            onTextFieldChange = {
+                if (!viewState.isProgress) onPasswordFieldChange.invoke(it)
             },
             secureText = true,
             enabled = !viewState.isProgress
-            )
+        )
         Row(
             modifier = Modifier.padding(top = 40.dp),
             verticalAlignment = Alignment.CenterVertically,
-            ){
+        ) {
             Checkbox(
                 enabled = !viewState.isProgress,
                 checked = viewState.rememberMeChecked,
@@ -62,13 +62,14 @@ fun SignInView(
 
             Spacer(modifier = Modifier.width(0.dp))
 
-            Text(text = stringResource(id = R.string.remember_check_title),fontFamily = Inika,)
+            Text(text = stringResource(id = R.string.remember_check_title), fontFamily = Inika)
 
             Spacer(modifier = Modifier.weight(1f))
 
-            Text(modifier = if(viewState.isProgress) Modifier else Modifier.clickable(onClick = onForgetClick),
+            Text(
+                modifier = if (viewState.isProgress) Modifier else Modifier.clickable(onClick = onForgetClick),
                 fontFamily = Inika,
-            text = stringResource(id = R.string.sign_in_forget),
+                text = stringResource(id = R.string.sign_in_forget),
             )
         }
 
@@ -78,29 +79,28 @@ fun SignInView(
                 .fillMaxWidth()
                 .height(58.dp),
             onClick = {
-                if(!viewState.isProgress)
-                   onLoginClick.invoke()
+                if (!viewState.isProgress)
+                    onLoginClick.invoke()
             },
             shape = RoundedCornerShape(size = 20.dp),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = AppTheme.colors.primaryTextColor
             )
-            ) {
-                if (viewState.isProgress){
-                    CircularProgressIndicator(
-                        strokeWidth = 2.dp,
-                        color = AppTheme.colors.actionTextColor
-                    )
-                }
-                else {
-                    Text(
-                        text = stringResource(id = R.string.action_login),
-                        fontWeight = FontWeight.Medium,
-                        color = AppTheme.colors.primaryBackground,
-                        style = TextStyle(fontSize = 35.sp),
-                        fontFamily = Inika,
-                    )
-                }
+        ) {
+            if (viewState.isProgress) {
+                CircularProgressIndicator(
+                    strokeWidth = 2.dp,
+                    color = AppTheme.colors.actionTextColor
+                )
+            } else {
+                Text(
+                    text = stringResource(id = R.string.action_login),
+                    fontWeight = FontWeight.Medium,
+                    color = AppTheme.colors.primaryBackground,
+                    style = TextStyle(fontSize = 35.sp),
+                    fontFamily = Inika,
+                )
+            }
         }
     }
 }

@@ -32,7 +32,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(): ViewModel(), EventHandler<LoginEvent> {
+class SearchViewModel @Inject constructor() : ViewModel(), EventHandler<LoginEvent> {
     private val _viewState = MutableLiveData(LoginViewState())
     val viewState: LiveData<LoginViewState> = _viewState
 
@@ -93,8 +93,6 @@ fun SearchView(state: MutableState<TextFieldValue>) {
 }
 
 
-
-
 @Composable
 fun ItemList(state: MutableState<TextFieldValue>) {
     val items by remember { mutableStateOf(listOf("Drink water", "Walk")) }
@@ -125,7 +123,6 @@ fun ItemList(state: MutableState<TextFieldValue>) {
 
     }
 }
-
 
 
 @Composable

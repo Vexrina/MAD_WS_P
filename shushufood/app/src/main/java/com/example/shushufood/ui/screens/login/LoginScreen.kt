@@ -71,23 +71,22 @@ fun LoginScreen(
                 )
             }
             item {
-                    Text(
-                        text = when (loginSubState) {
-                            LoginSubState.SignIn -> stringResource(id = R.string.sign_in_title)
-                            LoginSubState.SignUp -> stringResource(id = R.string.sign_up_title)
-                            LoginSubState.Forgot -> stringResource(id = R.string.forgot_title)
-                        }
-                        ,
-                        fontFamily = Inika,
-                        style = TextStyle(
+                Text(
+                    text = when (loginSubState) {
+                        LoginSubState.SignIn -> stringResource(id = R.string.sign_in_title)
+                        LoginSubState.SignUp -> stringResource(id = R.string.sign_up_title)
+                        LoginSubState.Forgot -> stringResource(id = R.string.forgot_title)
+                    },
+                    fontFamily = Inika,
+                    style = TextStyle(
                         color = AppTheme.colors.primaryTextColor,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 25.sp
-                        )
                     )
-                }
-            item{
-                Row(modifier = Modifier.padding(top = 0.dp)){
+                )
+            }
+            item {
+                Row(modifier = Modifier.padding(top = 0.dp)) {
                     Text(
                         text = when (loginSubState) {
                             LoginSubState.SignIn -> stringResource(id = R.string.sign_in_subtitle)
@@ -122,8 +121,8 @@ fun LoginScreen(
 
                 }
             }
-            item{
-                when(loginSubState){
+            item {
+                when (loginSubState) {
                     LoginSubState.SignIn -> SignInView(
                         viewState = this@with,
                         onLoginFieldChange = {
@@ -150,10 +149,10 @@ fun LoginScreen(
                         onPasswordFieldChange = {
                             loginViewModel.obtainEvent(LoginEvent.PasswordChanged(it))
                         },
-                        onFullNameFieldChange =  {
+                        onFullNameFieldChange = {
                             loginViewModel.obtainEvent(LoginEvent.FullNameChanged(it))
                         },
-                        onPhoneNumberFieldChange =  {
+                        onPhoneNumberFieldChange = {
                             loginViewModel.obtainEvent(LoginEvent.PhoneNumberChanged(it))
                         },
                         onRegisterClick = {
@@ -165,20 +164,20 @@ fun LoginScreen(
             }
         }
     }
-    LaunchedEffect(key1 = viewState.value.loginAction){
-        when (val action = viewState.value.loginAction){
+    LaunchedEffect(key1 = viewState.value.loginAction) {
+        when (val action = viewState.value.loginAction) {
             is LoginAction.OpenDashBoard -> {
-                navController.navigate("${NavigationTree.Main.name}/${action.username}"){
+                navController.navigate("${NavigationTree.Main.name}/${action.username}") {
                     popUpTo(0)
                 }
             }
             else -> Unit
         }
     }
-    DisposableEffect(key1 = Unit, effect ={
+    DisposableEffect(key1 = Unit, effect = {
         onDispose {
             loginViewModel.obtainEvent(LoginEvent.LoginActionInvoked)
         }
-    } )
+    })
 
 }
