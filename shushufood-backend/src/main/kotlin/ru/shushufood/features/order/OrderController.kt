@@ -14,6 +14,7 @@ class OrderController(private val call: ApplicationCall) {
         val receive = call.receive<OrderReceiveModel>()
         val order_id = Orders.insertAndGetId(
             OrderDTO(
+                id = null,
                 status = OrderStatus.ACCEPTED
             )
         )
@@ -36,5 +37,18 @@ class OrderController(private val call: ApplicationCall) {
             )
         )
 
+    }
+
+    suspend fun updateOrderStatus() {
+        val receive = call.receive<OrderIdModel>()
+        val order_id = receive.orderId
+
+
+        call.respond(
+            OrderResponseModel(
+                id = order_id,
+                status = Orders.updateStatus(order_id)
+            )
+        )
     }
 }
