@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,10 +19,13 @@ fun TextInputForSignUp(
     modifier: Modifier = Modifier,
     header: String,
     textFieldValue: String,
-    secureText: Boolean = false,
+//    secureText: Boolean = false,
     enabled: Boolean = true,
-    onTextFieldChange: (String) -> Unit
-) {
+    onTextFieldChange: (String) -> Unit,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    textVisuals: TextVisuals = TextVisuals.Text,
+    ) {
     Column(modifier = modifier)
     {
         Text(
@@ -35,10 +40,13 @@ fun TextInputForSignUp(
                 .padding(top = 5.dp)
                 .fillMaxWidth()
                 .height(50.dp),
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
             value = textFieldValue,
             onValueChange = onTextFieldChange,
             placeholder = header,
-            secureText = secureText
+//            secureText = secureText,
+            textVisuals = textVisuals
         )
     }
 }

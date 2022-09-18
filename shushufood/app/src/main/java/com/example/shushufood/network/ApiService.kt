@@ -1,6 +1,8 @@
 package com.example.shushufood.network
 
+import com.example.shushufood.network.models.LoginResult
 import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.RegisterResult
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.*
@@ -13,14 +15,17 @@ import io.ktor.serialization.kotlinx.json.*
 interface ApiService {
     suspend fun getProducts(query: String): List<MenuResponseModel>
 
-    suspend fun tryLogin(email: String, password: String): String
+    suspend fun tryLogin(
+        email: String,
+        password: String
+    ): LoginResult
 
     suspend fun tryRegister(
         email: String,
         password: String,
         phoneNumber: String,
         fullName: String
-    ): String
+    ): RegisterResult
 
 //  Admin application feature
 //    suspend fun createProducts(productRequest: MenuRequestModel): MenuResponseModel?

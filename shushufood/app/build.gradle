@@ -120,6 +120,7 @@ dependencies {
     // optional - Test helpers
     testImplementation("androidx.room:room-testing:$room_version")
 
+    implementation "com.googlecode.libphonenumber:libphonenumber:8.2.0"
 
 
 }

@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,6 +20,9 @@ fun TextInput(
     header: String,
     textFieldValue: String,
     secureText: Boolean = false,
+    textVisuals : TextVisuals = TextVisuals.Text,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     enabled: Boolean = true,
     onTextFieldChange: (String) -> Unit
 ) {
@@ -36,9 +41,11 @@ fun TextInput(
                 .fillMaxWidth()
                 .height(50.dp),
             value = textFieldValue,
+            textVisuals = textVisuals,
+            keyboardActions = keyboardActions,
+            keyboardOptions = keyboardOptions,
             onValueChange = onTextFieldChange,
             placeholder = header,
-            secureText = secureText
         )
     }
 }
