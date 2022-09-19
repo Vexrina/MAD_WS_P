@@ -1,6 +1,4 @@
 import httpx as h
-from wand.image import Image
-from wand.display import display
 MAIN_URL = 'http://localhost:8080/'
 
 def register(login, password, email, phone_number):
@@ -19,13 +17,13 @@ def login(email, password):
 
 # login('l','p')
 
-def menu_create(name, price, path_to_image, category):  #TODO
-    img = []
-    with Image(filename=path_to_image) as image:
-        img.append(img.append(image.channel_images))
-    data = {'name':name, 'price':price, 'image':img, 'category':category}
-    r = h.post(MAIN_URL+'menu/create', json=data)
-    print(r.status_code)
-    print(r.json())
+# def menu_create(name, price, path_to_image, category):  #TODO
+#     img = []
+#     with Image(filename=path_to_image) as image:
+#         img.append(img.append(image.channel_images))
+#     data = {'name':name, 'price':price, 'image':img, 'category':category}
+#     r = h.post(MAIN_URL+'menu/create', json=data)
+#     print(r.status_code)
+#     print(r.json())
 
 # menu_create('test', '3.00', ??, '3')

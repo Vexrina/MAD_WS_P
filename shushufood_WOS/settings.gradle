@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "shushufood_wearOS"
+rootProject.name = "shushufood_WOS"
 include ':app'
