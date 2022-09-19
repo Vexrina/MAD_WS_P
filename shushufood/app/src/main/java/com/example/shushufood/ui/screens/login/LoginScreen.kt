@@ -106,8 +106,8 @@ fun LoginScreen(
                                 loginViewModel.obtainEvent(LoginEvent.ActionClicked)
                             },
                             text = when (loginSubState) {
-                                LoginSubState.SignIn -> stringResource(id = R.string.sign_in_action)
-                                LoginSubState.SignUp -> stringResource(id = R.string.sign_up_action)
+                                LoginSubState.SignIn -> stringResource(id = R.string.sign_up_action)
+                                LoginSubState.SignUp -> stringResource(id = R.string.sign_in_action)
                                 else -> ""
                             },
                             fontFamily = Inika,
@@ -156,7 +156,7 @@ fun LoginScreen(
                             loginViewModel.obtainEvent(LoginEvent.PhoneNumberChanged(it))
                         },
                         onRegisterClick = {
-                            loginViewModel.obtainEvent(LoginEvent.LoginClicked)
+                            loginViewModel.obtainEvent(LoginEvent.RegisterClicked)
                         },
                     )
                     LoginSubState.Forgot -> ForgotView()

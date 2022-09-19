@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RegisterRequestModel(
-    val login: String,
+    val fullName: String,
     val password: String,
     val email: String,
-    val phone_number: String
+    val phoneNumber: String
 )

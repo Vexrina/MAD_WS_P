@@ -20,7 +20,7 @@ class RegisterController(val call: ApplicationCall) {
         }
 
 
-        val userDTO = Users.fetchUser(registerReceiveRemote.login)
+        val userDTO = Users.fetchUser(registerReceiveRemote.fullName)
         if (userDTO != null) {
             call.respond(HttpStatusCode.Conflict, "User already exist")
         } else {
@@ -29,10 +29,10 @@ class RegisterController(val call: ApplicationCall) {
             try {
                 Users.insert(
                     UserDTO(
-                        login = registerReceiveRemote.login,
+                        login = registerReceiveRemote.fullName,
                         password = registerReceiveRemote.password,
                         email = registerReceiveRemote.email,
-                        phone_number = registerReceiveRemote.phone_number
+                        phone_number = registerReceiveRemote.phoneNumber
                     )
                 )
             } catch (e: ExposedSQLException) {
@@ -42,7 +42,7 @@ class RegisterController(val call: ApplicationCall) {
 
             Tokens.insert(
                 TokenDTO(
-                    rowId = UUID.randomUUID().toString(), login = registerReceiveRemote.login, token = token
+                    rowId = UUID.randomUUID().toString(), login = registerReceiveRemote.fullName, token = token
                 )
             )
 

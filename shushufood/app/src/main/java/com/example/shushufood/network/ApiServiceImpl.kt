@@ -1,8 +1,6 @@
 package com.example.shushufood.network
 
-import com.example.shushufood.network.models.LoginRequestModel
-import com.example.shushufood.network.models.MenuRequestModel
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
@@ -40,27 +38,19 @@ class ApiServiceImpl(
         }
     }
 
-    override suspend fun tryLogin(email: String, password: String): String {
+    override suspend fun tryLogin(email: String, password: String): LoginResult {
         val response = client.post {
             url(ApiRoutes.LOGIN)
             contentType(ContentType.Application.Json)
             setBody(LoginRequestModel(email, password))
         }
         val token = response.body<String>()
-        return try {
-            token
-        } catch (ex: RedirectResponseException) {
-            // 3xx - responses
-            println("Error: ${ex.response.status.description}")
-            ""
-        } catch (ex: ClientRequestException) {
-            // 4xx - responses
-            println("Error: ${ex.response.status.description}")
-            ""
-        } catch (ex: ServerResponseException) {
-            // 5xx - response
-            println("Error: ${ex.response.status.description}")
-            ""
+
+        return when (response.status) {
+            HttpStatusCode.OK -> LoginResult.Ok(token = token)
+            HttpStatusCode.Conflict -> LoginResult.UserNotFound
+            HttpStatusCode.BadRequest -> LoginResult.InvalidPassword
+            else -> LoginResult.SomethingWentWrong
         }
     }
 
@@ -69,8 +59,29 @@ class ApiServiceImpl(
         password: String,
         phoneNumber: String,
         fullName: String
-    ): String {
-        TODO("Not yet implemented")
+    ): RegisterResult {
+//        TODO("Not yet implemented")
+        val response = client.post {
+            url(ApiRoutes.REGISTER)
+            contentType(ContentType.Application.Json)
+            setBody(RegisterRequestModel(
+                fullName = fullName,
+                email = email,
+                password = password,
+                phoneNumber = phoneNumber
+            ))
+        }
+
+        return try {
+            when (response.status) {
+                HttpStatusCode.OK -> RegisterResult.Ok(token = response.body<RegisterResponseModel>().token)
+                HttpStatusCode.BadRequest -> RegisterResult.EmailIsNoValid
+                HttpStatusCode.Conflict -> RegisterResult.UserAlreadyExists
+                else -> RegisterResult.SomethingWentWrong
+            }
+        } catch (e: Exception) {
+            RegisterResult.SomethingWentWrong
+        }
     }
 
 
