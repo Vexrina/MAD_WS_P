@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shushufood.common.EventHandler
+import com.example.shushufood.network.ApiService
 import com.example.shushufood.ui.screens.login.models.LoginAction
 import com.example.shushufood.ui.screens.login.models.LoginEvent
 import com.example.shushufood.ui.screens.login.models.LoginSubState
@@ -29,6 +30,7 @@ class LoginViewModel @Inject constructor() : ViewModel(), EventHandler<LoginEven
             is LoginEvent.ForgetClicked -> forgetClicked()
             is LoginEvent.CheckboxClicked -> checkboxClicked(event.value)
             is LoginEvent.LoginClicked -> loginClicked()
+            is LoginEvent.RegisterClicked -> registerClicked()
             is LoginEvent.FullNameChanged -> fullNameChanged(event.value)
             is LoginEvent.PhoneNumberChanged -> phoneChanged(event.value)
         }
@@ -43,16 +45,38 @@ class LoginViewModel @Inject constructor() : ViewModel(), EventHandler<LoginEven
 
     }
 
+    private fun registerClicked() {
+        performRegister()
+    }
+    private val apiService by lazy {
+        ApiService.create()
+    }
+
+    private fun performRegister() {
+        viewModelScope.launch {
+            with (_viewState.value) {
+                apiService.tryRegister(
+                    email = this!!.emailValue,
+                    fullName = this!!.fullNameValue,
+                    password = this!!.passwordValue,
+                    phoneNumber = this!!.phoneNumberValue
+                )
+            }
+        }
+    }
+
     private fun loginActionInvoked() {
         _viewState.postValue(_viewState.value?.copy(loginAction = LoginAction.None))
     }
 
     private fun fullNameChanged(value: String) {
-        _viewState.postValue(_viewState.value?.copy(fullNameValue = value))
+        _viewState.postValue(_viewState.value?.copy(fullNameValue = value.filter { it.isLetter() || it.isWhitespace() }))
     }
 
     private fun phoneChanged(value: String) {
-        _viewState.postValue(_viewState.value?.copy(phoneNumberValue = value))
+        if (value.countDigits() < 12) {
+            _viewState.postValue(_viewState.value?.copy(phoneNumberValue = value))
+        }
     }
 
     private fun emailChanged(value: String) {
@@ -83,5 +107,15 @@ class LoginViewModel @Inject constructor() : ViewModel(), EventHandler<LoginEven
             )
 
         }
+    }
+
+    fun String.countDigits(): Int {
+        var counter = 0
+        forEach {
+            if (it.isDigit()) {
+                counter++
+            }
+        }
+        return counter
     }
 }

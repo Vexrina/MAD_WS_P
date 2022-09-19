@@ -9,5 +9,8 @@ fun Application.configureOrderRouting() {
         post("/order/make_order") {
             OrderController(call).makeOrder()
         }
+        post("/order/update_order_status") {
+            OrderController(call).updateOrderStatus()
+        }
     }
 }

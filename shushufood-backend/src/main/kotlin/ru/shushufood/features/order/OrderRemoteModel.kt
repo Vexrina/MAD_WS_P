@@ -16,6 +16,11 @@ data class OrderReceiveModel(
 )
 
 @Serializable
+data class OrderIdModel(
+    val orderId: Int
+)
+
+@Serializable
 data class OrderResponseModel(
     val id: Int,
     val status: Int

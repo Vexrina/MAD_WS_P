@@ -2,6 +2,8 @@ package com.example.shushufood.ui.screens.login.views
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
@@ -11,10 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shushufood.R
 import com.example.shushufood.ui.components.TextInputForSignUp
+import com.example.shushufood.ui.components.TextVisuals
 import com.example.shushufood.ui.screens.login.models.LoginViewState
 import com.example.shushufood.ui.theme.AppTheme
 
@@ -33,6 +38,13 @@ fun SignUpView(
             header = stringResource(id = R.string.email_hint),
             textFieldValue = viewState.emailValue,
             enabled = !viewState.isProgress,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = {}
+            ),
             onTextFieldChange = {
                 if (!viewState.isProgress) onEmailFieldChange.invoke(it)
             },
@@ -44,7 +56,14 @@ fun SignUpView(
             onTextFieldChange = {
                 if (!viewState.isProgress) onPasswordFieldChange.invoke(it)
             },
-            secureText = true,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = {}
+            ),
+            textVisuals = TextVisuals.Password,
             enabled = !viewState.isProgress
         )
         TextInputForSignUp(
@@ -54,7 +73,13 @@ fun SignUpView(
             onTextFieldChange = {
                 if (!viewState.isProgress) onFullNameFieldChange.invoke(it)
             },
-            secureText = false,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = {}
+            ),
             enabled = !viewState.isProgress
         )
         TextInputForSignUp(
@@ -64,7 +89,14 @@ fun SignUpView(
             onTextFieldChange = {
                 if (!viewState.isProgress) onPhoneNumberFieldChange.invoke(it)
             },
-            secureText = false,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Phone,
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {}
+            ),
+            textVisuals = TextVisuals.PhoneNumber,
             enabled = !viewState.isProgress
         )
         Button(
