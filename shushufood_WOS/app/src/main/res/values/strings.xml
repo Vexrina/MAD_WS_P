@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">shushufood_WOS</string>
+    <string name="email">E-mail</string>
+    <string name="password">Pasword</string>
+    <string name="actionLogin">Log In!</string>
 </resources>
