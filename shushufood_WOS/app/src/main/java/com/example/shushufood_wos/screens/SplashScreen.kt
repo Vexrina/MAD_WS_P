@@ -19,6 +19,6 @@ fun SplashScreen(navController: NavController) {
     )
     //Thread.sleep(3000)
     LaunchedEffect(key1 = Unit, block = {
-        navController.navigate(NavigationTree.Main.name)
+        navController.navigate(NavigationTree.Login.name)
     })
 }
