@@ -1,7 +1,8 @@
 package com.example.shushufood_wos.network
 
+import android.net.http.HttpResponseCache.install
+import android.system.Os.accept
 import com.example.shushufood_wos.network.models.LoginResult
-import com.example.shushufood_wos.network.models.RegisterResult
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.*
@@ -18,13 +19,6 @@ interface ApiService {
         email: String,
         password: String
     ): LoginResult
-
-    suspend fun tryRegister(
-        email: String,
-        password: String,
-        phoneNumber: String,
-        fullName: String
-    ): RegisterResult
 
 //  Admin application feature
 //    suspend fun createProducts(productRequest: MenuRequestModel): MenuResponseModel?
