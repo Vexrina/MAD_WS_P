@@ -5,6 +5,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,7 +15,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shushufood_wos.theme.WearAppColorPalette
-import androidx.compose.material.TextFieldDefaults
 
 enum class TextVisuals {
     Text, Password
@@ -51,7 +51,7 @@ fun DTextField(
         },
         shape = RoundedCornerShape(10.dp),
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = WearAppColorPalette.background,
+            backgroundColor = WearAppColorPalette.primary,
             errorIndicatorColor = WearAppColorPalette.primaryVariant,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,

@@ -5,29 +5,24 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.ButtonDefaults
 import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.Text
-import com.example.shushufood_wos.screens.loginsUtils.LoginEvent
-import com.example.shushufood_wos.screens.loginsUtils.LoginSubState
-import com.example.shushufood_wos.screens.loginsUtils.LoginViewModel
-import com.example.shushufood_wos.screens.loginsUtils.LoginViewState
+import com.example.shushufood_wos.screens.loginsUtils.*
 import com.example.shushufood_wos.theme.WearAppColorPalette
 import com.example.shushufood_wos.utils.TextInput
 import com.example.shushufood_wos.utils.TextVisuals
@@ -61,6 +56,16 @@ fun LoginScreen(
                     )
                 }
             }
+        }
+    }
+    LaunchedEffect(key1 = viewState.value.loginAction) {
+        when (val action = viewState.value.loginAction) {
+            is LoginAction.OpenDashBoard -> {
+                navController.navigate("${NavigationTree.Main.name}/${action.username}") {
+                    popUpTo(0)
+                }
+            }
+            else -> Unit
         }
     }
 }
@@ -139,4 +144,5 @@ fun SignInView(
             }
         }
     }
+
 }

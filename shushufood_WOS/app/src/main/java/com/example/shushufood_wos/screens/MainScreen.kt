@@ -8,7 +8,7 @@ import androidx.wear.compose.material.*
 import com.example.shushufood_wos.theme.WearAppColorPalette
 
 @Composable
-fun MainScreen() {
+fun MainScreen(username: String) {
     val listState = rememberScalingLazyListState()
     Scaffold(
         timeText = {

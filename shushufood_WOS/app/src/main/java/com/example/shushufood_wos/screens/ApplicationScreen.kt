@@ -17,15 +17,15 @@ fun ApplicationScreen() {
     val navController = rememberSwipeDismissableNavController()
     SwipeDismissableNavHost(
         navController = navController,
-        startDestination = NavigationTree.Login.name
+        startDestination = NavigationTree.Splash.name
     ) {
         composable(NavigationTree.Splash.name) { SplashScreen(navController) }
         composable(NavigationTree.Login.name) {
             val loginViewModel = hiltViewModel<LoginViewModel>()
             LoginScreen(loginViewModel = loginViewModel, navController = navController)
         }
-        composable(NavigationTree.Main.name) {
-            MainScreen()
+        composable("${NavigationTree.Main.name}/{username}") { backStackEntry ->
+            MainScreen(backStackEntry.arguments?.getString("username").orEmpty())
         }
     }
 }
