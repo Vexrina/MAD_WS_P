@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shushufood.common.EventHandler
 import com.example.shushufood.network.ApiService
+import com.example.shushufood.network.models.LoginResult
+import com.example.shushufood.network.models.RegisterResult
 import com.example.shushufood.ui.screens.login.models.LoginAction
 import com.example.shushufood.ui.screens.login.models.LoginEvent
 import com.example.shushufood.ui.screens.login.models.LoginSubState
 import com.example.shushufood.ui.screens.login.models.LoginViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -54,13 +55,27 @@ class LoginViewModel @Inject constructor() : ViewModel(), EventHandler<LoginEven
 
     private fun performRegister() {
         viewModelScope.launch {
+            _viewState.postValue(_viewState.value?.copy(isProgress = true))
             with (_viewState.value) {
-                apiService.tryRegister(
+                val registerResult = apiService.tryRegister(
                     email = this!!.emailValue,
                     fullName = this!!.fullNameValue,
                     password = this!!.passwordValue,
                     phoneNumber = this!!.phoneNumberValue
                 )
+                when (registerResult) {
+                    is RegisterResult.Ok -> {
+                        _viewState.postValue(
+                            _viewState.value?.copy(
+                                isProgress = false,
+                                loginAction = LoginAction.OpenDashBoard(_viewState.value!!.emailValue)
+                            )
+                        )
+                    }
+                    else -> {
+                        _viewState.postValue(_viewState.value?.copy(isProgress = false))
+                    }
+                }
             }
         }
     }
@@ -98,14 +113,24 @@ class LoginViewModel @Inject constructor() : ViewModel(), EventHandler<LoginEven
     private fun loginClicked() {
         viewModelScope.launch(Dispatchers.IO) {
             _viewState.postValue(_viewState.value?.copy(isProgress = true))
-            delay(100)
-            _viewState.postValue(
-                _viewState.value?.copy(
-                    isProgress = false,
-                    loginAction = LoginAction.OpenDashBoard("qwerty")
-                )
-            )
 
+            val loginResult = apiService.tryLogin(
+                email = _viewState.value!!.emailValue,
+                password = _viewState.value!!.passwordValue
+            )
+            when (loginResult){
+                is LoginResult.Ok -> {
+                    _viewState.postValue(
+                        _viewState.value?.copy(
+                            isProgress = false,
+                            loginAction = LoginAction.OpenDashBoard(_viewState.value!!.emailValue)
+                        )
+                    )
+                }
+                else -> {
+                    _viewState.postValue(_viewState.value?.copy(isProgress = false))
+                }
+            }
         }
     }
 

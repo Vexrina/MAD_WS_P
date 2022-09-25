@@ -39,18 +39,23 @@ class ApiServiceImpl(
     }
 
     override suspend fun tryLogin(email: String, password: String): LoginResult {
-        val response = client.post {
-            url(ApiRoutes.LOGIN)
-            contentType(ContentType.Application.Json)
-            setBody(LoginRequestModel(email, password))
-        }
-        val token = response.body<String>()
+        try {
+            val response = client.post {
+                url(ApiRoutes.LOGIN)
+                contentType(ContentType.Application.Json)
+                setBody(LoginRequestModel(email, password))
+            }
+//        val token = response.body<String>()
 
-        return when (response.status) {
-            HttpStatusCode.OK -> LoginResult.Ok(token = token)
-            HttpStatusCode.Conflict -> LoginResult.UserNotFound
-            HttpStatusCode.BadRequest -> LoginResult.InvalidPassword
-            else -> LoginResult.SomethingWentWrong
+
+            return when (response.status) {
+                HttpStatusCode.OK -> LoginResult.Ok(token = response.body<LoginResponseModel>().token)
+                HttpStatusCode.Conflict -> LoginResult.UserNotFound
+                HttpStatusCode.BadRequest -> LoginResult.InvalidPassword
+                else -> LoginResult.SomethingWentWrong
+            }
+        } catch (e: Exception) {
+            return LoginResult.SomethingWentWrong
         }
     }
 
@@ -60,19 +65,21 @@ class ApiServiceImpl(
         phoneNumber: String,
         fullName: String
     ): RegisterResult {
-//        TODO("Not yet implemented")
-        val response = client.post {
-            url(ApiRoutes.REGISTER)
-            contentType(ContentType.Application.Json)
-            setBody(RegisterRequestModel(
-                fullName = fullName,
-                email = email,
-                password = password,
-                phoneNumber = phoneNumber
-            ))
-        }
-
         return try {
+            val response = client.post {
+                url(ApiRoutes.REGISTER)
+                contentType(ContentType.Application.Json)
+                setBody(
+                    RegisterRequestModel(
+                        fullName = fullName,
+                        email = email,
+                        password = password,
+                        phoneNumber = phoneNumber
+                    )
+                )
+            }
+
+
             when (response.status) {
                 HttpStatusCode.OK -> RegisterResult.Ok(token = response.body<RegisterResponseModel>().token)
                 HttpStatusCode.BadRequest -> RegisterResult.EmailIsNoValid

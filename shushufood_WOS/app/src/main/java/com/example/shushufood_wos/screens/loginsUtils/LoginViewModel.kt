@@ -57,9 +57,6 @@ class LoginViewModel @Inject constructor() : ViewModel(), EventHandler<LoginEven
                     _viewState.postValue(_viewState.value?.copy(isProgress = false))
                 }
             }
-
-
-
         }
     }
 
