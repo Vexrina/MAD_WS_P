@@ -91,6 +91,35 @@ class ApiServiceImpl(
         }
     }
 
+    override suspend fun tryMakeOrder(itemMap: Map<MenuResponseModel, Int>): OrderResult {
+        var itemInfoList = mutableListOf<ItemInfo>()
+        itemMap.forEach {
+            itemInfoList.add(
+                ItemInfo(
+                    item_name = it.key.name,
+                    item_category = it.key.category,
+                    quantity = it.value
+                )
+            )
+        }
+        return try {
+            val response = client.post {
+                url(ApiRoutes.MAKE_ORDER)
+                contentType(ContentType.Application.Json)
+                setBody(
+                    OrderRequestModel(itemInfoList)
+                )
+            }
+
+            when (response.status) {
+                HttpStatusCode.OK -> OrderResult.Ok(orderResponseModel = response.body<OrderResponseModel>())
+                else -> OrderResult.SomethingWentWrong
+            }
+        } catch (e: Exception) {
+            OrderResult.SomethingWentWrong
+        }
+
+    }
 
 // Admin application feature
 

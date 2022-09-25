@@ -105,7 +105,7 @@ fun CartScreen(
             }
             Box(
                 modifier = Modifier
-                    .clickable { /*TODO*/ }
+                    .clickable { cartViewModel.obtainEvent(CartEvent.MakeOrderClicked) }
                     .weight(1f)
                     .fillMaxHeight(),
                 contentAlignment = Alignment.Center

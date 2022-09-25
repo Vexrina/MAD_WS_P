@@ -2,6 +2,7 @@ package com.example.shushufood.network
 
 import com.example.shushufood.network.models.LoginResult
 import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.OrderResult
 import com.example.shushufood.network.models.RegisterResult
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
@@ -26,6 +27,10 @@ interface ApiService {
         phoneNumber: String,
         fullName: String
     ): RegisterResult
+
+    suspend fun tryMakeOrder(
+        itemMap: Map<MenuResponseModel, Int>
+    ): OrderResult
 
 //  Admin application feature
 //    suspend fun createProducts(productRequest: MenuRequestModel): MenuResponseModel?

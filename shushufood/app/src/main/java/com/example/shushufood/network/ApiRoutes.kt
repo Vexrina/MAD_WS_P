@@ -5,4 +5,5 @@ object ApiRoutes {
     const val MENU_SEARCH = "$BASE_URL/menu/search"
     const val REGISTER = "$BASE_URL/register"
     const val LOGIN = "$BASE_URL/login"
+    const val MAKE_ORDER = "$BASE_URL/order/make_order"
 }

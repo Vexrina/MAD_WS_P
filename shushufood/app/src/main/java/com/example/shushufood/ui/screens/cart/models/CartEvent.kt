@@ -7,4 +7,5 @@ sealed class CartEvent {
 
     data class IncreaseItemCount(val item: MenuResponseModel) : CartEvent()
     data class DecreaseItemCount(val item: MenuResponseModel) : CartEvent()
+    object MakeOrderClicked : CartEvent()
 }
