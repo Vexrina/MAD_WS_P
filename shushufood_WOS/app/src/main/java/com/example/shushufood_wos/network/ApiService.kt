@@ -3,6 +3,7 @@ package com.example.shushufood_wos.network
 import android.net.http.HttpResponseCache.install
 import android.system.Os.accept
 import com.example.shushufood_wos.network.models.LoginResult
+import com.example.shushufood_wos.network.models.OrderListModel
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.*
@@ -13,15 +14,15 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 
 interface ApiService {
-//    suspend fun getProducts(query: String): List<MenuResponseModel>
+
+    suspend fun tryGetOrders(
+        email: String
+    ) : OrderListModel?
 
     suspend fun tryLogin(
         email: String,
         password: String
     ): LoginResult
-
-//  Admin application feature
-//    suspend fun createProducts(productRequest: MenuRequestModel): MenuResponseModel?
 
     companion object {
         fun create(): ApiService {

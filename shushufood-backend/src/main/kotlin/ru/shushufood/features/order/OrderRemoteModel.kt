@@ -1,6 +1,7 @@
 package ru.shushufood.features.order
 
 import kotlinx.serialization.Serializable
+import ru.shushufood.features.menu.MenuResponse
 
 
 @Serializable
@@ -12,7 +13,13 @@ data class ItemInfo(
 
 @Serializable
 data class OrderReceiveModel(
-    val itemList: List<ItemInfo>
+    val itemList: List<ItemInfo>,
+    val userEmail: String
+)
+
+@Serializable
+data class OrderEmailModel(
+    val userEmail: String
 )
 
 @Serializable
@@ -22,6 +29,18 @@ data class OrderIdModel(
 
 @Serializable
 data class OrderResponseModel(
-    val id: Int,
+    val id: Int?,
     val status: Int
+)
+
+@Serializable
+data class OrderFetchModel(
+    val id: Int,
+    val status: Int,
+    val menuItems: List<MenuResponse>
+)
+
+@Serializable
+data class OrderListModel(
+    val orderList: List<OrderFetchModel>?,
 )

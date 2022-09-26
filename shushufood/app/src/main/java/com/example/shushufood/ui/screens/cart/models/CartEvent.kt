@@ -1,6 +1,6 @@
 package com.example.shushufood.ui.screens.cart.models
 
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 
 sealed class CartEvent {
     data class ItemAddClicked(val value: MenuResponseModel) : CartEvent()

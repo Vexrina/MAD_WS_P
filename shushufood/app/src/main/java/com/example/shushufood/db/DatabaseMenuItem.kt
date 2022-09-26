@@ -3,7 +3,7 @@ package com.example.shushufood.db
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 import com.example.shushufood.utils.Converters
 import java.math.BigDecimal
 

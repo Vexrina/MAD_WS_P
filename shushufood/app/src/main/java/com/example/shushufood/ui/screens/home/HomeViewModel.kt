@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.shushufood.common.EventHandler
 import com.example.shushufood.common.MenuRepository
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 import com.example.shushufood.ui.screens.home.models.HomeEvent
 import com.example.shushufood.ui.screens.home.models.HomeSubState
 import com.example.shushufood.ui.screens.home.models.HomeViewState

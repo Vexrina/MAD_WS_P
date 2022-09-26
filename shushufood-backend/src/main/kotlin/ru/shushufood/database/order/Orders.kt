@@ -11,14 +11,37 @@ import org.jetbrains.exposed.sql.update
 object Orders : IdTable<Int>("orders") {
     override val id = Orders.integer("id").autoIncrement().entityId()
     private val status = Orders.integer("status")
+    private val user_email = Orders.varchar("user_email", 25)
 
     fun insertAndGetId(orderDTO: OrderDTO): Int {
         var id = transaction {
             Orders.insertAndGetId {
                 it[status] = orderDTO.status
+                it[user_email] = orderDTO.user_email
             }
         }
         return id.value
+    }
+
+    fun fetchOrders(orderEmail: String): List<OrderDTO>? {
+        return try {
+            transaction {
+                val orderModels = Orders.select{Orders.user_email.eq(orderEmail)}
+                val orderList = mutableListOf<OrderDTO>()
+                orderModels.forEach {
+                    orderList.add(
+                        OrderDTO(
+                            id = it[Orders.id].value,
+                            status = it[status],
+                            user_email = it[user_email]
+                        )
+                    )
+                }
+                orderList
+            }
+        } catch (e: Exception) {
+            null
+        }
     }
 
     fun updateStatus(orderId: Int): Int {

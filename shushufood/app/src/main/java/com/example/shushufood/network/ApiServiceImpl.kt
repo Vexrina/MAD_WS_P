@@ -1,6 +1,12 @@
 package com.example.shushufood.network
 
-import com.example.shushufood.network.models.*
+import com.example.shushufood.network.models.login.LoginRequestModel
+import com.example.shushufood.network.models.login.LoginResponseModel
+import com.example.shushufood.network.models.login.LoginResult
+import com.example.shushufood.network.models.menuorders.*
+import com.example.shushufood.network.models.register.RegisterRequestModel
+import com.example.shushufood.network.models.register.RegisterResponseModel
+import com.example.shushufood.network.models.register.RegisterResult
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*

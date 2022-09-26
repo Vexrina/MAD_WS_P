@@ -6,8 +6,8 @@ import androidx.lifecycle.Transformations
 import com.example.shushufood.db.AppDatabase
 import com.example.shushufood.db.asDomainModel
 import com.example.shushufood.network.ApiService
-import com.example.shushufood.network.models.MenuResponseModel
-import com.example.shushufood.network.models.asDatabaseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

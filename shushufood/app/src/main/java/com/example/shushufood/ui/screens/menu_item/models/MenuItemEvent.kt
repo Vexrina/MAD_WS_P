@@ -1,6 +1,6 @@
 package com.example.shushufood.ui.screens.menu_item.models
 
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 
 sealed class MenuItemEvent {
     object DecreaseClicked : MenuItemEvent()

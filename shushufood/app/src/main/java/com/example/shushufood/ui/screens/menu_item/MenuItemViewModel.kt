@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.shushufood.common.Cart
 import com.example.shushufood.common.EventHandler
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 import com.example.shushufood.ui.screens.menu_item.models.MenuItemEvent
 import com.example.shushufood.ui.screens.menu_item.models.MenuItemViewState
 import dagger.hilt.android.lifecycle.HiltViewModel

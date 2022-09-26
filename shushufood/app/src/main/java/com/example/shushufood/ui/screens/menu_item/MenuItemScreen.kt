@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shushufood.R
 import com.example.shushufood.common.Cart
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 import com.example.shushufood.ui.components.ItemCounter
 import com.example.shushufood.utils.byteArrayToBmp
 

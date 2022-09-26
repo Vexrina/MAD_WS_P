@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.shushufood.common.Cart
 import com.example.shushufood.common.EventHandler
 import com.example.shushufood.network.ApiService
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 import com.example.shushufood.ui.screens.cart.models.CartEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

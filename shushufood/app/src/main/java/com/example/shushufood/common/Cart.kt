@@ -2,7 +2,7 @@ package com.example.shushufood.common
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 
 
 data class OrderLine(

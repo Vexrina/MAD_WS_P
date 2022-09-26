@@ -1,9 +1,9 @@
 package com.example.shushufood.network
 
-import com.example.shushufood.network.models.LoginResult
-import com.example.shushufood.network.models.MenuResponseModel
-import com.example.shushufood.network.models.OrderResult
-import com.example.shushufood.network.models.RegisterResult
+import com.example.shushufood.network.models.login.LoginResult
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.OrderResult
+import com.example.shushufood.network.models.register.RegisterResult
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.*

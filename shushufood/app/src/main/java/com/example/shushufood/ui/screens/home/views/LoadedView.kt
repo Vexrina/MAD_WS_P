@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.shushufood.navigation.NavigationTree
-import com.example.shushufood.network.models.MenuResponseModel
+import com.example.shushufood.network.models.menuorders.MenuResponseModel
 import com.example.shushufood.ui.components.MenuCard
 import com.example.shushufood.ui.screens.home.HomeViewModel
 import com.example.shushufood.ui.screens.home.models.HomeEvent

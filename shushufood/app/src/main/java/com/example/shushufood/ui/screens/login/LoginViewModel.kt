@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shushufood.common.EventHandler
 import com.example.shushufood.network.ApiService
-import com.example.shushufood.network.models.LoginResult
-import com.example.shushufood.network.models.RegisterResult
+import com.example.shushufood.network.models.login.LoginResult
+import com.example.shushufood.network.models.register.RegisterResult
 import com.example.shushufood.ui.screens.login.models.LoginAction
 import com.example.shushufood.ui.screens.login.models.LoginEvent
 import com.example.shushufood.ui.screens.login.models.LoginSubState
