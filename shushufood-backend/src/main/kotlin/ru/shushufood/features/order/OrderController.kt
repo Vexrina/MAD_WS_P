@@ -3,6 +3,8 @@ package ru.shushufood.features.order
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.select
 import ru.shushufood.database.menu.Menu
 import ru.shushufood.database.order.OrderDTO
 import ru.shushufood.database.order.OrderStatus
@@ -64,8 +66,10 @@ class OrderController(private val call: ApplicationCall) {
             val orderPositionsDTOList = OrderPositions.fetchPositions(it.id!!)
             val menuItemsList = mutableListOf<MenuResponse>()
             orderPositionsDTOList?.forEach { orderPositionsDTO ->
-                val menuItemModel = Menu.fetchFullMenu()
-                menuItemModel.filter { it.name.equals(orderPositionsDTO.menu_name, ignoreCase = true) }.single()
+                val menuItemModel = Menu.fetchFullMenu().filter {
+                    it.name.equals(orderPositionsDTO.menu_name)
+                }
+
                 menuItemsList.add(
                     MenuResponse(
                         name = menuItemModel.first().name,
