@@ -16,7 +16,7 @@ fun ApplicationScreen() {
 
     NavHost(
         navController = navController,
-        startDestination = "${NavigationTree.Login.name}"
+        startDestination = NavigationTree.Login.name
     ) {
         composable(NavigationTree.Splash.name) { SplashScreen(navController) }
         composable(NavigationTree.Login.name) {

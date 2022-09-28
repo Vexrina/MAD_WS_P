@@ -10,6 +10,8 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +34,7 @@ fun SignUpView(
     onFullNameFieldChange: (String) -> Unit,
     onRegisterClick: () -> Unit
 ) {
+    val focusManager = LocalFocusManager.current
     Column(modifier = Modifier.fillMaxSize()) {
         TextInputForSignUp(
             modifier = Modifier.padding(top = 0.dp),
@@ -43,7 +46,9 @@ fun SignUpView(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = {}
+                onNext = {
+                    focusManager.moveFocus(FocusDirection.Down)
+                }
             ),
             onTextFieldChange = {
                 if (!viewState.isProgress) onEmailFieldChange.invoke(it)
@@ -61,7 +66,9 @@ fun SignUpView(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = {}
+                onNext = {
+                    focusManager.moveFocus(FocusDirection.Down)
+                }
             ),
             textVisuals = TextVisuals.Password,
             enabled = !viewState.isProgress
@@ -78,7 +85,7 @@ fun SignUpView(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = {}
+                onNext = {focusManager.moveFocus(FocusDirection.Down)}
             ),
             enabled = !viewState.isProgress
         )
@@ -94,7 +101,7 @@ fun SignUpView(
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = {}
+                onDone = {focusManager.clearFocus()}
             ),
             textVisuals = TextVisuals.PhoneNumber,
             enabled = !viewState.isProgress

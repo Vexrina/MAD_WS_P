@@ -28,8 +28,6 @@ class HomeViewModel @Inject constructor(
     var menuItems: LiveData<List<MenuResponseModel>>
 
     init {
-//        val menuDao = AppDatabase.getInstance(application).menuDao()
-//        menuRepository = MenuRepository(menuDao)
         repository = MenuRepository(application)
         menuItems = MenuRepository.menuItems
         refreshMenuFromRepository()

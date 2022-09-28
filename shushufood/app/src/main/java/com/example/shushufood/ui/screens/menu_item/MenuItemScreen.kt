@@ -1,11 +1,10 @@
 package com.example.shushufood.ui.screens.menu_item
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -19,6 +18,8 @@ import com.example.shushufood.R
 import com.example.shushufood.common.Cart
 import com.example.shushufood.network.models.menuorders.MenuResponseModel
 import com.example.shushufood.ui.components.ItemCounter
+import com.example.shushufood.ui.theme.AppTheme
+import com.example.shushufood.ui.theme.Inika
 import com.example.shushufood.utils.byteArrayToBmp
 
 
@@ -41,19 +42,33 @@ fun MenuItemScreen(
         )
         Text(
             text = menuItem.name,
-            fontSize = 24.sp,
-            modifier = Modifier.padding(top = 8.dp)
+            fontSize = 32.sp,
+            modifier = Modifier.padding(top = 16.dp),
+            fontFamily = Inika,
+            color = AppTheme.colors.primaryTextColor
         )
 
 
 
 
         if (viewState.value?.getOrDefault(menuItem, 0) == 0) {
-            Button(onClick = {
-                Cart.addItem(menuItem)
-            }) {
+            Button(
+                onClick = {
+                    Cart.addItem(menuItem)
+                    },
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .height(60.dp)
+                    .width(180.dp),
+                shape = RoundedCornerShape(20.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = AppTheme.colors.primaryTextColor),
+
+            ) {
                 Text(
-                    text = stringResource(id = R.string.add_item)
+                    text = stringResource(id = R.string.add_item),
+                    color = AppTheme.colors.primaryBackground,
+                    fontSize = 24.sp,
+                    fontFamily = Inika,
                 )
             }
         } else {
@@ -61,24 +76,31 @@ fun MenuItemScreen(
                 count = viewState.value!!.getOrDefault(menuItem, 0),
                 onDecreaseClicked = {
                     Cart.removeItem(menuItem)
-//                    quantity -= 1
                 },
                 onIncreaseClicked = {
                     Cart.addItem(menuItem)
-//                    quantity += 1
                 }
             )
         }
-        Button(onClick = {
-            Cart.removeItem(menuItem = menuItem, true)
-//            quantity = 0
-        }) {
-            Text(text = stringResource(id = R.string.remove_items))
+        Button(
+            onClick = {
+                Cart.removeItem(menuItem = menuItem, true)
+                },
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .height(60.dp)
+                .width(180.dp),
+            shape = RoundedCornerShape(20.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = AppTheme.colors.primaryTextColor),
+        ) {
+            Text(
+                text = stringResource(id = R.string.remove_items),
+                color = AppTheme.colors.primaryBackground,
+                fontSize = 24.sp,
+                fontFamily = Inika,
+            )
         }
     }
-//    LaunchedEffect(key1 = true) {
-//        quantity = Cart.cartItems.value?.getOrDefault(menuItem, 0)!!
-//    }
 
 }
 

@@ -70,7 +70,3 @@ fun LoadedView(
         }
     }
 }
-
-
-/*
-navController.navigate("${NavigationTree.MenuItem.name}/{${product.name}}")*/

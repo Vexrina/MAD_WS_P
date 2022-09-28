@@ -30,11 +30,6 @@ fun HomeScreen(
 ) {
 
     val products = homeViewModel.menuItems.observeAsState().value
-
-
-//    val viewState = searchViewModel.viewState.observeAsState(SearchViewState())
-    // with(viewState.value){
-
     val viewState = homeViewModel.viewState.observeAsState(HomeViewState())
 
     with(viewState.value)

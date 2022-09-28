@@ -62,7 +62,7 @@ fun SignInView(
                 if (!viewState.isProgress) onPasswordFieldChange.invoke(it)
             },
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email,
+                keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
